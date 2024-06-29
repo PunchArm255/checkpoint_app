@@ -6,6 +6,7 @@ import { images } from '../../constants'
 import FormField from '../../components/FormField'
 import CustomButton from '../../components/CustomButton'
 import { Link } from 'expo-router'
+import { LinearGradient } from 'expo-linear-gradient'
 
 const SignIn = () => {
   const [form, setForm] = useState({
@@ -17,12 +18,13 @@ const SignIn = () => {
 
   }
   return (
-    <SafeAreaView className="bg-primary h-full">
+    <LinearGradient colors={['#1c063b', '#080019']} style={{ flex: 1 }}>
+    <SafeAreaView className="h-full">
       <ScrollView>
-        <View className="w-full justify-center min-h-[84vh] px-5 my-6">
+        <View className="w-full justify-center min-h-[84vh] px-7 my-6">
           <Image source={images.logo}
-          resizeMode='contain' className="w-[250px] h-[150] justify-center" />
-          <Text className="text-2xl text-khder text-bold font-bold">
+          resizeMode='contain' className="w-[300px] h-[150]" />
+          <Text className="text-2xl text-secpurpe text-bold font-bold">
             Log in to Checkpoint
           </Text>
           <FormField 
@@ -45,14 +47,15 @@ const SignIn = () => {
              isLoading={isSubmitting}
           />
           <View className="justify-center pt-5 flex-row gap-2">
-            <Text className="text-lg text-black font-regular">
-              Don't have an account hh?
+            <Text className="text-lg text-lightpurpe font-regular">
+              no account lol?
             </Text>
-            <Link href="/sign-up" className="text-lg font-semibold first-letter:text-khder">Sign Up</Link>
+            <Link href="/sign-up" className="text-lg font-semibold first-letter:text-secpurpe">Sign Up</Link>
           </View>
         </View>
       </ScrollView>
     </SafeAreaView>
+    </LinearGradient>
   )
 }
 

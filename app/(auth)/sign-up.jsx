@@ -6,6 +6,7 @@ import { images } from '../../constants'
 import FormField from '../../components/FormField'
 import CustomButton from '../../components/CustomButton'
 import { Link } from 'expo-router'
+import { LinearGradient } from 'expo-linear-gradient'
 
 const SignUp = () => {
   const [form, setForm] = useState({
@@ -18,12 +19,13 @@ const SignUp = () => {
 
   }
   return (
+    <LinearGradient colors={['#1c063b', '#080019']} style={{ flex: 1 }}>
     <SafeAreaView className="bg-primary h-full">
       <ScrollView>
         <View className="w-full justify-center min-h-[84vh] px-5 my-6">
           <Image source={images.logo}
           resizeMode='contain' className="w-[250px] h-[150]" />
-          <Text className="text-2xl text-khder text-bold font-bold">
+          <Text className="text-2xl text-secpurpe text-bold font-bold">
             Sign up to Checkpoint
           </Text>
           <FormField 
@@ -52,14 +54,15 @@ const SignUp = () => {
              isLoading={isSubmitting}
           />
           <View className="justify-center pt-5 flex-row gap-2">
-            <Text className="text-lg text-black font-regular">
-              Have an account already?
+            <Text className="text-lg text-lightpurpe font-regular">
+              already accounted bruv?
             </Text>
-            <Link href="/sign-in" className="text-lg font-semibold first-letter:text-khder">Sign In</Link>
+            <Link href="/sign-in" className="text-lg font-semibold first-letter:text-secpurpe">Sign In</Link>
           </View>
         </View>
       </ScrollView>
     </SafeAreaView>
+    </LinearGradient>
   )
 }
 

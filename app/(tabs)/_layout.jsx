@@ -1,7 +1,6 @@
-import { View, Text, Image } from 'react-native'
-import React from 'react'
-import { Tabs, Redirect } from 'expo-router';
-import { useFonts } from 'expo-font';
+import { View, Text, Image } from 'react-native';
+import React from 'react';
+import { Tabs } from 'expo-router';
 import { icons } from '../../constants';
 
 const TabIcon = ({ icon, color, name, focused }) => {
@@ -13,9 +12,9 @@ const TabIcon = ({ icon, color, name, focused }) => {
                tintColor={color}
                className="w-6 h-6"
             />
-            <Text className={`${focused ? 'font-extrabold text-green-600' : 'font-regular text-green-700'} text-xs`}>
+            {/*<Text className={`${focused ? 'font-extrabold text-secpurpe' : 'font-regular text-lightpurpe'} text-xs`}>
                {name}
-            </Text>
+            </Text>*/}
         </View>
     )
 }
@@ -25,17 +24,25 @@ const TabsLayout = () => {
     <>
       <Tabs screenOptions={{
         tabBarShowLabel: false,
-        tabBarActiveTintColor: '#00cc6a',
-        tabBarInactiveTintColor: '#87c2a6',
+        tabBarActiveTintColor: '#c5b0ef',
+        tabBarInactiveTintColor: '#eee0fe',
         tabBarStyle: {
+            backgroundColor: '#2c1f59',
+            borderTopWidth: 0,
             height: 84,
-            borderTopLeftRadius: 25,
-            borderTopRightRadius: 25,
-            overflow: 'hidden',
+            width: 300,
+            borderRadius: 40,
             position: 'absolute',
-            left: 0,
-            bottom: 0,
-            right: 0,
+            left: 10,
+            right: 10,
+            bottom: 10,
+            elevation: 5, // for Android shadow
+            shadowColor: '#2c1f59', // iOS shadow
+            shadowOpacity: 0.1, // iOS shadow
+            shadowOffset: { width: 0, height: 4 }, // iOS shadow
+            shadowRadius: 20, // iOS shadow
+            marginLeft: 63,
+            marginBottom: 20,
         }
       }}>
         <Tabs.Screen
@@ -88,4 +95,4 @@ const TabsLayout = () => {
   )
 }
 
-export default TabsLayout
+export default TabsLayout;

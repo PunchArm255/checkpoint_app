@@ -1,18 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
 import { ScrollView, Text, View, Image } from 'react-native';
-import { Redirect, router } from 'expo-router'
+import { Redirect, router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { images } from '../constants';
 import CustomButton from '../components/CustomButton';
+import {LinearGradient} from 'expo-linear-gradient';
 
 export default function App() {
   return (
-    <SafeAreaView className="bg-primary h-full">
-        <ScrollView contentContainerStyle={{height: '100%'}}>
+    <LinearGradient colors={['#1c063b', '#080019']} style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1 }}>
+        <ScrollView contentContainerStyle={{ height: '100%' }}>
           <View className="w-full justify-center items-center min-h-[85vh] px-4">
             <Image 
                source={images.logo}
-               className="w-[250px] h-[150]"
+               className="w-[320px] h-[150px]"
                resizeMode="contain"
             />
             <Image 
@@ -21,8 +23,8 @@ export default function App() {
                resizeMode="contain"
             />
             <View className="relative mt-5">
-              <Text className="text-3xl text-black font-extrabold text-center">
-              Track your habits, conquer your addictions, transform your life.
+              <Text className="text-3xl text-secpurpe font-extrabold text-center">
+                Track your habits, conquer your addictions, transform your life.
               </Text>
               <CustomButton 
                 title="Continue with Email"
@@ -37,6 +39,7 @@ export default function App() {
             </View>
           </View>
         </ScrollView>
-    </SafeAreaView>
+      </SafeAreaView>
+    </LinearGradient>
   );
 }
