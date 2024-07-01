@@ -3,7 +3,7 @@ import { SplashScreen, Stack } from 'expo-router';
 import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
 
-/*SplashScreen.preventAutoHideAsync();*/
+SplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
   const [fontsLoaded, error] = useFonts({
@@ -18,7 +18,7 @@ const RootLayout = () => {
     "Poppins-Thin": require("../assets/fonts/Poppins-Thin.ttf"),
   });
 
-  /*useEffect(() => {
+  useEffect(() => {
     if (error) throw error;
   
     if (fontsLoaded) {
@@ -26,7 +26,7 @@ const RootLayout = () => {
     }
   }, [fontsLoaded, error]);
   
-  if (!fontsLoaded && !error) return null;*/
+  if (!fontsLoaded && !error) return null;
 
   return (
     <Stack>

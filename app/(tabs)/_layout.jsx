@@ -2,6 +2,8 @@ import { View, Text, Image } from 'react-native';
 import React from 'react';
 import { Tabs } from 'expo-router';
 import { icons } from '../../constants';
+import { Platform } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const TabIcon = ({ icon, color, name, focused }) => {
     return (
@@ -36,8 +38,8 @@ const TabsLayout = () => {
             left: 10,
             right: 10,
             bottom: 10,
-            elevation: 5, // for Android shadow
-            shadowColor: '#2c1f59', // iOS shadow
+            elevation: 0, // for Android shadow
+            shadowColor: '#c5b0ef', // iOS shadow
             shadowOpacity: 0.1, // iOS shadow
             shadowOffset: { width: 0, height: 4 }, // iOS shadow
             shadowRadius: 20, // iOS shadow
@@ -89,6 +91,18 @@ const TabsLayout = () => {
                 />
             )
            }}
+        />
+        <Tabs.Screen
+           name="habits"
+           options={{ 
+            headerShown: false,
+            tabBarButton: () => null }}
+        />
+        <Tabs.Screen
+           name="addictions"
+           options={{
+            headerShown: false,
+            tabBarButton: () => null }}
         />
       </Tabs>
     </>

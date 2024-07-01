@@ -11,10 +11,16 @@ import rightArrow from "../assets/icons/right-arrow.png";
 import logout from "../assets/icons/logout.png";
 import eyeHide from "../assets/icons/eye-hide.png";
 import eye from "../assets/icons/eye.png";
-import play from "../assets/icons/play.png";
+import habits from "../assets/icons/habits.png";
+import addictions from "../assets/icons/addictions.png";
+import calendar from "../assets/icons/calendar.png";
+import streak from "../assets/icons/streak.png";
 
 export default {
-  play,
+  habits,
+  addictions,
+  streak,
+  calendar,
   bookmark,
   home,
   settings,
