@@ -16,6 +16,7 @@ const SignUp = () => {
     password: ''
   })
   const [isSubmitting, setisSubmitting] = useState(false)
+  
   const submit = async () => {
     if(!form.username || !form.email || !form.password) {
       Alert.alert('Error', 'Please fill all fields')
@@ -40,10 +41,10 @@ const SignUp = () => {
     <SafeAreaView className="bg-primary h-full">
       <ScrollView>
         <View className="w-full justify-center min-h-[84vh] px-5 my-6">
-          <Image source={images.logo}
-          resizeMode='contain' className="w-[250px] h-[150]" />
-          <Text className="text-2xl text-secpurpe text-bold font-bold">
-            Sign up to Checkpoint
+          <Image source={images.logo2}
+          resizeMode='contain' className="w-[250px] h-[150] ml-10" />
+          <Text className="text-2xl text-secpurpe text-bold font-pbold">
+            Create your account
           </Text>
           <FormField 
             title="Username"
@@ -67,14 +68,14 @@ const SignUp = () => {
           <CustomButton
              title="Sign Up"
              handlePress={submit}
-             containerStyles="mt-7"
+             containerStyles="mt-9"
              isLoading={isSubmitting}
           />
           <View className="justify-center pt-5 flex-row gap-2">
-            <Text className="text-lg text-lightpurpe font-regular">
+            <Text className="text-lg text-lightpurpe font-pregular">
               already accounted bruv?
             </Text>
-            <Link href="/sign-in" className="text-lg font-semibold first-letter:text-secpurpe">Sign In</Link>
+            <Link href="/sign-in" className="text-lg font-psemibold first-letter:text-secpurpe">Sign In</Link>
           </View>
         </View>
       </ScrollView>

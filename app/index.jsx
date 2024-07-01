@@ -22,14 +22,14 @@ export default function App() {
                className="max-w-[380px] w-full h-[300px]"
                resizeMode="contain"
             />
-            <View className="relative mt-5">
-              <Text className="text-3xl text-secpurpe font-extrabold text-center">
+            <View className="relative mt-5 px-4">
+              <Text className="text-3xl text-secpurpe font-psemibold text-center">
                 Track your habits, conquer your addictions, transform your life.
               </Text>
               <CustomButton 
                 title="Continue with Email"
                 handlePress={() => router.push('/sign-in')}
-                containerStyles="mt-7"
+                containerStyles="mt-8"
               />
               <CustomButton 
                 title="Continue without account"

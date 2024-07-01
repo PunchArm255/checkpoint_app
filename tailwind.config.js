@@ -11,10 +11,18 @@ module.exports = {
         lightpurpe: '#eee0fe',
         gradL: '#18154a',
         gradR: '#2c1f59'
-    },
-    backgroundImage: {
-      grapurpe: 'linear-gradient(90deg, #1c063b 0%, #080019 100%)',
-    },
+      },
+      fontFamily: {
+        pthin: ["Poppins-Thin", "sans-serif"],
+        pextralight: ["Poppins-ExtraLight","sans-serif"],
+        plight: ["Poppins-Light", "sans-serif"],
+        pregular: ["Poppins-Regular", "sans-serif"],
+        pmedium: ["Poppins-Medium", "sans-serif"],
+        psemibold: ["Poppins-SemiBold", "sans-serif"],
+        pbold: ["Poppins-Bold", "sans-serif"],
+        pextrabold: ["Poppins-ExtraBold", "sans-serif"],
+        pblack: ["Poppins-Black", "sans-serif"],
+      }
   },
   plugins: [],
 }
