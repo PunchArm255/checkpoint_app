@@ -1,40 +1,45 @@
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, Alert, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { ScrollView } from 'react-native'
 import { images } from '../../constants'
 import FormField from '../../components/FormField'
 import CustomButton from '../../components/CustomButton'
-import { Link } from 'expo-router'
+import { Link, router } from 'expo-router'
 import { LinearGradient } from 'expo-linear-gradient'
-import { signIn } from '../../lib/appwrite'
-import { Alert } from 'react-native'
+
+import { getCurrentUser, signIn } from "../../lib/appwrite";
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 const SignIn = () => {
+  const { setUser, setIsLogged } = useGlobalContext();
+  const [isSubmitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
-    email: '',
-    password: ''
-  })
-  const [isSubmitting, setisSubmitting] = useState(false)
+    email: "",
+    password: "",
+  });
+
   const submit = async () => {
-    if(!form.username || !form.email || !form.password) {
-      Alert.alert('Error', 'Please fill all fields')
+    if (form.email === "" || form.password === "") {
+      Alert.alert("Error", "Please fill in all fields");
     }
 
-    setisSubmitting(true);
+    setSubmitting(true);
 
     try {
-      const result = await signIn(form.email, form.password)
+      await signIn(form.email, form.password);
+      const result = await getCurrentUser();
+      setUser(result);
+      setIsLogged(true);
 
-      // set to global state perhaps
-      router.replace('/home')
+      Alert.alert("Success", "User signed in successfully");
+      router.replace("/home");
     } catch (error) {
-      Alert.alert('Error', error.message)
+      Alert.alert("Error", error.message);
     } finally {
-      setisSubmitting(false)
+      setSubmitting(false);
     }
-    createUser();
-  }
+  };
+
   return (
     <LinearGradient colors={['#1c063b', '#080019']} style={{ flex: 1 }}>
     <SafeAreaView className="h-full">

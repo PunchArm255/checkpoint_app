@@ -4,6 +4,7 @@ import { Tabs } from 'expo-router';
 import { icons } from '../../constants';
 import { Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 const TabIcon = ({ icon, color, name, focused }) => {
     return (

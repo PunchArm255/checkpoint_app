@@ -5,8 +5,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { images } from '../constants';
 import CustomButton from '../components/CustomButton';
 import {LinearGradient} from 'expo-linear-gradient';
+import { useGlobalContext } from "../context/GlobalProvider";
 
-export default function App() {
+const Welcome = () => {
+  const { loading, isLogged } = useGlobalContext();
+
+  if (!loading && isLogged) return <Redirect href="/home" />;
+
   return (
     <LinearGradient colors={['#1c063b', '#080019']} style={{ flex: 1 }}>
       <SafeAreaView style={{ flex: 1 }}>
@@ -42,4 +47,6 @@ export default function App() {
       </SafeAreaView>
     </LinearGradient>
   );
-}
+};
+
+export default Welcome;
