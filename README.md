@@ -1,4 +1,4 @@
-# Welcome to Checkpoint! 🙌🏻
+# Welcome to Checkpoint! 🚩
 
 Checkpoint is a habit and addiction tracker application built with React Native and Expo. The app allows users to create accounts, log their habits and addictions, and track their progress over time.
 
@@ -17,10 +17,10 @@ To be added.
 
 ## Technologies Used
 
-- React Native
-- Expo
-- Tailwind CSS (NativeWind)
-- Appwrite
+- ⚛️ React Native
+- 🛜 Expo
+- 🍃 Tailwind CSS (NativeWind)
+- 🟥 Appwrite
 
 ## Usage
 
