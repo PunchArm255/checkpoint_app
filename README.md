@@ -1,50 +1,40 @@
-# Welcome to your Expo app 👋
+# Welcome to Checkpoint! 🙌🏻
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Checkpoint is a habit and addiction tracker application built with React Native and Expo. The app allows users to create accounts, log their habits and addictions, and track their progress over time.
 
-## Get started
+## Features
 
-1. Install dependencies
+- 👤 User Authentication: Sign up and log in with email and password.
+- 🔥 Habit Tracking: Track habits with counters for active habits, logged habits, and streaks.
+- 🚬 Addiction Tracking: Track addictions similarly to habits.
+- ✏️ User Profile: Update user profile information.
+- 📱 Responsive Design: Optimized for various device sizes.
+- 🖥️ Appwrite Integration: Uses Appwrite for backend services.
 
-   ```bash
-   npm install
-   ```
+## Screenshots
 
-2. Start the app
+To be added.
 
-   ```bash
-    npx expo start
-   ```
+## Technologies Used
 
-In the output, you'll find options to open the app in a
+- React Native
+- Expo
+- Tailwind CSS (NativeWind)
+- Appwrite
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Usage
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- **Sign Up**: Create a new account with email, password, and username.
+- **Sign In**: Log in to your account.
+- **Track Habits**: Add, update, and track your habits.
+- **Track Addictions**: Add, update, and track your addictions.
+- **Profile Management**: Update your profile information.
 
-## Get a fresh project
 
-When you're ready, run:
+## Contact
 
-```bash
-npm run reset-project
-```
+If you have any questions or feedback, feel free to reach out.
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- **Name**: Simo Nassiri
+- **Email**: simohammednassiri.b@gmail.com
+- **GitHub**: [PunchArm255](https://github.com/PunchArm255)
