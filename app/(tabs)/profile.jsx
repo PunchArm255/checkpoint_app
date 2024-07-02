@@ -30,7 +30,7 @@ const Profile = () => {
           <Text className="text-3xl font-pbold text-secpurpe">{item.id}</Text>
          )}*/
          ListHeaderComponent={() => (
-          <View className="my-6 px-4 space-y-6">
+          <View className="my-7 px-4 space-y-6">
             <View className="flex justify-center items-start flex-row mb-6">
               <View>
                 <Text className="text-3xl font-pbold text-secpurpe">Profile</Text>
@@ -41,31 +41,31 @@ const Profile = () => {
          )}
          
          ListEmptyComponent={() => (
-          <View className="w-full flex justify-center items-center mt-6 mb-12 px-4">
-            <TouchableOpacity
-              onPress={logout}
-              className="flex w-full items-end mb-10"
-            >
-              <Image
-                source={icons.logout}
-                resizeMode="contain"
-                className="w-6 h-6"
-              />
-            </TouchableOpacity>
-
-            <View className="w-16 h-16 border border-7 rounded-full flex justify-center items-center">
+          <View className="w-full flex justify-center items-center mt-6 mb-12 px-[25%]">
+            <View className="w-[100px] h-[100px] border-2 border-secpurpe rounded-full flex justify-center items-center">
               <Image
                 source={{ uri: user?.avatar }}
-                className="w-[90%] h-[90%] rounded-lg"
+                className="w-[90%] h-[90%] rounded-full"
                 resizeMode="cover"
               />
             </View>
 
             <InfoBox
               title={user?.username}
-              containerStyles="mt-5"
-              titleStyles="text-lg"
+              containerStyles="mt-3"
+              titleStyles="text-2xl text-lightpurpe font-pbold"
             />
+
+            <TouchableOpacity
+               onPress={logout}
+               className="flex flex-row w-full items-center mb-10 bg-secpurpe px-10 py-5 rounded-full justify-center">
+                  <Text className="text-2xl font-pbold text-gradL">Logout</Text>
+                  <Image
+                     source={icons.logout}
+                     resizeMode="contain"
+                     className="w-6 h-6 ml-2" // Add a margin-left to create some space between the text and the icon
+                  />
+            </TouchableOpacity>
 
           </View>
         )}

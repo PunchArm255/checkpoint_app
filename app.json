@@ -21,7 +21,8 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff",
         "package": "com.nassiri.checkpoint"
-      }
+      },
+      "package": "com.nassiri.checkpoint"
     },
     "web": {
       "bundler": "metro",
@@ -34,6 +35,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "62725275-e830-4aa2-a4c9-b94ce22db33f"
+      }
     }
   }
 }

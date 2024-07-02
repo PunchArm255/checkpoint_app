@@ -63,8 +63,10 @@ const Habits = () => {
             <TouchableOpacity onPress={() => startEditHabit(item.id)} className="p-5 py-6 mb-5 bg-secpurpe rounded-[30px]">
               <View className="flex-row items-center justify-between px-2">
                 <Text className="text-xl font-pbold text-gradL">{item.name}</Text>
-                <TouchableOpacity onPress={() => toggleDone(item.id)}>
-                  <Text className="text-lg font-psemibold text-gradL">{item.done ? '✓' : '✗'}</Text>
+                <TouchableOpacity 
+                className="bg-gradR rounded-full w-8 h-8"
+                onPress={() => toggleDone(item.id)}>
+                  <Text className="text-lg font-psemibold text-secpurpe items-center justify-center">{item.done ? '  ✓' : '  ✗'}</Text>
                 </TouchableOpacity>
               </View>
             </TouchableOpacity>

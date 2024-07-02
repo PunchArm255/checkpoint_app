@@ -4,8 +4,11 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { icons } from '../../constants';
+import InfoBox from "../../components/InfoBox";
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 const Home = () => {
+  const { user, setUser, setIsLogged } = useGlobalContext();
   const router = useRouter();
 
   return (
@@ -14,10 +17,14 @@ const Home = () => {
         <FlatList 
           ListHeaderComponent={() => (
             <View className="my-6 px-4 space-y-6">
-              <View className="flex justify-center items-start flex-row mb-6">
+              <View className="flex justify-center items-start flex-row mb-1">
                 <View>
                   <Text className="font-psemibold text-sm text-secpurpe">Welcome Back</Text>
-                  <Text className="text-3xl font-pbold text-lightpurpe">PunchArm255</Text>
+                  <InfoBox
+                      title={user?.username}
+                      containerStyles="mt-0"
+                      titleStyles="text-3xl font-pbold text-lightpurpe"
+                  />
                 </View>
               </View>
 
@@ -34,7 +41,7 @@ const Home = () => {
                     </View>
                     <View className="flex-row items-center">
                       <Image source={icons.calendar} className="w-9 h-9 mr-2 mb-1" />
-                      <Text className="text-3xl font-pbold text-gradL">Daily Log: Y</Text>
+                      <Text className="text-3xl font-pbold text-gradL">Daily Log: ✓</Text>
                     </View>
                     <View className="flex-row items-center">
                       <Image source={icons.streak} className="w-9 h-9 mr-2 mb-1" />
@@ -54,7 +61,7 @@ const Home = () => {
                     </View>
                     <View className="flex-row items-center">
                       <Image source={icons.calendar} className="w-9 h-9 mr-2 mb-1" />
-                      <Text className="text-3xl font-pbold text-gradL">Daily Log: Y</Text>
+                      <Text className="text-3xl font-pbold text-gradL">Daily Log: ✓</Text>
                     </View>
                     <View className="flex-row items-center">
                       <Image source={icons.streak} className="w-9 h-9 mr-2 mb-1" />
