@@ -71,7 +71,7 @@ const SignIn = () => {
           />
           <View className="justify-center pt-5 flex-row gap-2">
             <Text className="text-lg text-lightpurpe font-pregular">
-              no account lol?
+              No account yet?
             </Text>
             <Link href="/sign-up" className="text-lg font-psemibold first-letter:text-secpurpe">Sign Up</Link>
           </View>

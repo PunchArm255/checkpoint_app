@@ -76,7 +76,7 @@ const SignUp = () => {
           />
           <View className="justify-center pt-5 flex-row gap-2">
             <Text className="text-lg text-lightpurpe font-pregular">
-              already accounted bruv?
+              Already signed up?
             </Text>
             <Link href="/sign-in" className="text-lg font-psemibold first-letter:text-secpurpe">Sign In</Link>
           </View>
