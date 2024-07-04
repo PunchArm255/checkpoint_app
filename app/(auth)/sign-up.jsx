@@ -43,9 +43,9 @@ const SignUp = () => {
     <LinearGradient colors={['#1c063b', '#080019']} style={{ flex: 1 }}>
     <SafeAreaView className="bg-primary h-full">
       <ScrollView>
-        <View className="w-full justify-center min-h-[84vh] px-5 my-6">
-          <Image source={images.logo2}
-          resizeMode='contain' className="w-[250px] h-[150] ml-10" />
+        <View className="w-full justify-center min-h-[84vh] px-5 my-[6%]">
+        <Image source={images.logo2}
+          resizeMode='contain' className="w-[280px] h-[80]" />
           <Text className="text-2xl text-secpurpe text-bold font-pbold">
             Create your account
           </Text>

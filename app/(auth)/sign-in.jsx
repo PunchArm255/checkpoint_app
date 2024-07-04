@@ -44,9 +44,9 @@ const SignIn = () => {
     <LinearGradient colors={['#1c063b', '#080019']} style={{ flex: 1 }}>
     <SafeAreaView className="h-full">
       <ScrollView>
-        <View className="w-full justify-center min-h-[84vh] px-7 my-6">
+        <View className="w-full justify-center min-h-[75vh] px-7 my-[4%]">
           <Image source={images.logo2}
-          resizeMode='contain' className="w-[300px] h-[150]" />
+          resizeMode='contain' className="w-[280px] h-[80]" />
           <Text className="text-2xl text-secpurpe text-bold font-pbold">
             Log in to your account
           </Text>
@@ -54,7 +54,7 @@ const SignIn = () => {
             title="Email"
             value={form.email}
             handleChangeText={(e) => setForm({ ...form, email: e})}
-            otherStyles="mt-7"
+            otherStyles="mt-[20%]"
             keyboardType="email-address"
           />
           <FormField 

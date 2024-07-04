@@ -13,16 +13,13 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true,
-      "package": "com.nassiri.checkpoint"
+      "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff",
-        "package": "com.nassiri.checkpoint"
-      },
-      "package": "com.nassiri.checkpoint"
+        "backgroundColor": "#ffffff"
+      }
     },
     "web": {
       "bundler": "metro",
