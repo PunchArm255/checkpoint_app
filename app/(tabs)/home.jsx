@@ -19,8 +19,8 @@ const Home = () => {
       <SafeAreaView>
         <FlatList 
           ListHeaderComponent={() => (
-            <View className="my-6 px-4 space-y-6">
-              <View className="flex justify-center items-start flex-row mb-1">
+            <View className="my-6 px-4 space-y-[1%]">
+              <View className="flex justify-center items-start flex-row mb-[1%]">
                 <View>
                   <Text className="font-psemibold text-sm text-secpurpe">Welcome Back</Text>
                   <InfoBox
