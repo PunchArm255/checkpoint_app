@@ -1,11 +1,12 @@
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, TextInput, Modal, Button } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, TextInput, Modal } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 const Habits = () => {
-  const [habits, setHabits] = useState([]);
+  const { habits, setHabits, habitStreak, setHabitStreak } = useGlobalContext();
   const [modalVisible, setModalVisible] = useState(false);
   const [newHabit, setNewHabit] = useState('');
   const [editHabitId, setEditHabitId] = useState(null);

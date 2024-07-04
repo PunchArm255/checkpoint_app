@@ -89,6 +89,13 @@ const TabsLayout = () => {
             headerShown: false,
             tabBarButton: () => null }}
         />
+
+        <Tabs.Screen
+           name="about"
+           options={{
+            headerShown: false,
+            tabBarButton: () => null }}
+        />
       </Tabs>
     </>
   );

@@ -2,9 +2,11 @@ import { StyleSheet, Text, View, TouchableOpacity, Switch, FlatList } from 'reac
 import React, { useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useRouter } from 'expo-router';
 
 const Settings = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const router = useRouter();
 
   const handleDarkModeToggle = () => {
     setIsDarkMode(previousState => !previousState);
@@ -51,7 +53,7 @@ const Settings = () => {
 
               {/* About Box */}
               <View className="bg-secpurpe rounded-[30px] p-4 space-y-4">
-                <TouchableOpacity className="p-4 bg-savpurpe rounded-[22px]">
+                <TouchableOpacity className="p-4 bg-savpurpe rounded-[22px]" onPress={() => router.push('/about')}>
                   <Text className="text-2xl font-pbold text-gradR">About</Text>
                 </TouchableOpacity>
               </View>

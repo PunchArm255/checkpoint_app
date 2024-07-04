@@ -8,8 +8,11 @@ import InfoBox from "../../components/InfoBox";
 import { useGlobalContext } from "../../context/GlobalProvider";
 
 const Home = () => {
-  const { user, setUser, setIsLogged } = useGlobalContext();
+  const { user, habits, habitStreak, addictions, addictionStreak } = useGlobalContext();
   const router = useRouter();
+
+  const habitsLoggedToday = habits.every(habit => habit.done);
+  const addictionsLoggedToday = addictions.every(addiction => addiction.done);
 
   return (
     <LinearGradient colors={['#1c063b', '#080019']} style={{ flex: 1 }}>
@@ -37,15 +40,15 @@ const Home = () => {
                   <View className="justify-center pt-5 pl-7 space-y-2 ">
                     <View className="flex-row items-center">
                       <Image source={icons.habits} className="w-9 h-9 mr-2 mb-1" />
-                      <Text className="text-3xl font-pbold text-gradL">Habits: 1</Text>
+                      <Text className="text-3xl font-pbold text-gradL">Habits: {habits.length}</Text>
                     </View>
                     <View className="flex-row items-center">
                       <Image source={icons.calendar} className="w-9 h-9 mr-2 mb-1" />
-                      <Text className="text-3xl font-pbold text-gradL">Daily Log: ✓</Text>
+                      <Text className="text-3xl font-pbold text-gradL">Daily Log: {habitsLoggedToday ? '✓' : '✗'}</Text>
                     </View>
                     <View className="flex-row items-center">
                       <Image source={icons.streak} className="w-9 h-9 mr-2 mb-1" />
-                      <Text className="text-3xl font-pbold text-gradL">Streak: 1</Text>
+                      <Text className="text-3xl font-pbold text-gradL">Streak: {habitStreak}</Text>
                     </View>
                   </View>
                 </TouchableOpacity>
@@ -57,21 +60,22 @@ const Home = () => {
                   <View className="justify-center pt-5 pl-7 space-y-2">
                     <View className="flex-row items-center">
                       <Image source={icons.addictions} className="w-9 h-9 mr-2 mb-1" />
-                      <Text className="text-3xl font-pbold text-gradL">Addictions: 1</Text>
+                      <Text className="text-3xl font-pbold text-gradL">Addictions: {addictions.length}</Text>
                     </View>
                     <View className="flex-row items-center">
                       <Image source={icons.calendar} className="w-9 h-9 mr-2 mb-1" />
-                      <Text className="text-3xl font-pbold text-gradL">Daily Log: ✓</Text>
+                      <Text className="text-3xl font-pbold text-gradL">Daily Log: {addictionsLoggedToday ? '✓' : '✗'}</Text>
                     </View>
                     <View className="flex-row items-center">
                       <Image source={icons.streak} className="w-9 h-9 mr-2 mb-1" />
-                      <Text className="text-3xl font-pbold text-gradL">Streak: 1</Text>
+                      <Text className="text-3xl font-pbold text-gradL">Streak: {addictionStreak}</Text>
                     </View>
                   </View>
                 </TouchableOpacity>
               </View>
             </View>
           )}
+          renderItem={null} // FlatList needs this prop, but we don't need to render items here
         />
       </SafeAreaView>
     </LinearGradient>

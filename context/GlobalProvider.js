@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-
 import { getCurrentUser } from "../lib/appwrite";
 
 const GlobalContext = createContext();
@@ -9,6 +8,10 @@ const GlobalProvider = ({ children }) => {
   const [isLogged, setIsLogged] = useState(false);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [habits, setHabits] = useState([]);
+  const [habitStreak, setHabitStreak] = useState(0);
+  const [addictions, setAddictions] = useState([]);
+  const [addictionStreak, setAddictionStreak] = useState(0);
 
   useEffect(() => {
     getCurrentUser()
@@ -37,6 +40,14 @@ const GlobalProvider = ({ children }) => {
         user,
         setUser,
         loading,
+        habits,
+        setHabits,
+        habitStreak,
+        setHabitStreak,
+        addictions,
+        setAddictions,
+        addictionStreak,
+        setAddictionStreak
       }}
     >
       {children}
