@@ -74,7 +74,7 @@ const Addictions = () => {
             </View>
           )}
           ListHeaderComponent={() => (
-            <View className="my-6 px-[10vh] space-y-6">
+            <View className="my-6 px-[20%] space-y-6">
               <View className="flex justify-center items-start flex-row mb-6">
                 <View>
                   <Text className="text-3xl font-pbold text-secpurpe">Addictions</Text>
