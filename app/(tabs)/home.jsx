@@ -34,7 +34,7 @@ const Home = () => {
               <View className="space-y-8 px-9 h-50 w-50 justify-center items-center">
                 <Text className="text-3xl font-pbold text-secpurpe mt-5">Activity</Text>
                 <TouchableOpacity 
-                  className="bg-secpurpe rounded-[40px] p-3 w-[320px] h-[200px]"
+                  className="bg-secpurpe rounded-[40px] p-3 w-[320px] h-[200px] bg-opacity-10"
                   onPress={() => router.push('/habits')}
                 >
                   <View className="justify-center pt-5 pl-7 space-y-2 ">

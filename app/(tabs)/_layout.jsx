@@ -13,11 +13,11 @@ const TabIcon = ({ icon, color, name, focused }) => {
                source={icon}
                resizeMode="contain"
                tintColor={color}
-               className="w-6 h-6"
+               className="w-8 h-8"
             />
-            <Text className={`${focused ? 'font-pbold text-secpurpe' : 'font-psemibold text-lightpurpe'} text-xs`}>
+            {/*<Text className={`${focused ? 'font-pbold text-secpurpe' : 'font-psemibold text-lightpurpe'} text-xs`}>
                {name}
-            </Text>
+            </Text>}*/}
         </View>
     );
 };
@@ -31,6 +31,7 @@ const TabsLayout = () => {
         tabBarInactiveTintColor: '#eee0fe',
         tabBarStyle: styles.tabBar,
         safeAreaInsets: { bottom: 20 },
+        
       }}>
         <Tabs.Screen
            name="home"
@@ -114,8 +115,8 @@ const styles = StyleSheet.create({
     left: '15%',
     right: '5%',
     bottom: 10,
-    elevation: 0, // for Android shadow
-    shadowColor: '#c5b0ef', // iOS shadow
+    elevation: 10, // for Android shadow
+    shadowColor: '#2c1f59', // iOS shadow
     shadowOpacity: 0.1, // iOS shadow
     shadowOffset: { width: 0, height: 4 }, // iOS shadow
     shadowRadius: 20, // iOS shadow
