@@ -6,7 +6,7 @@ import { useRouter } from 'expo-router';
 import { useGlobalContext } from "../../context/GlobalProvider";
 
 const Habits = () => {
-  const { habits, setHabits, habitStreak, setHabitStreak } = useGlobalContext();
+  const { habits, handleAddHabit, handleUpdateHabit, handleDeleteHabit } = useGlobalContext();
   const [modalVisible, setModalVisible] = useState(false);
   const [newHabit, setNewHabit] = useState('');
   const [editHabitId, setEditHabitId] = useState(null);
@@ -15,21 +15,21 @@ const Habits = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const resetHabits = habits.map(habit => ({ ...habit, done: false }));
-      setHabits(resetHabits);
+      habits.forEach(habit => handleUpdateHabit(habit.id, { done: false }));
     }, 24 * 60 * 60 * 1000); // Reset every 24 hours
 
     return () => clearInterval(interval);
   }, [habits]);
 
   const addHabit = () => {
-    setHabits([...habits, { id: Date.now().toString(), name: newHabit, done: false }]);
+    handleAddHabit({ name: newHabit, done: false });
     setNewHabit('');
     setModalVisible(false);
   };
 
   const toggleDone = id => {
-    setHabits(habits.map(habit => habit.id === id ? { ...habit, done: !habit.done } : habit));
+    const habit = habits.find(habit => habit.id === id);
+    handleUpdateHabit(id, { done: !habit.done });
   };
 
   const startEditHabit = id => {
@@ -40,14 +40,14 @@ const Habits = () => {
   };
 
   const saveEditHabit = () => {
-    setHabits(habits.map(habit => habit.id === editHabitId ? { ...habit, name: editHabitName } : habit));
+    handleUpdateHabit(editHabitId, { name: editHabitName });
     setEditHabitId(null);
     setEditHabitName('');
     setModalVisible(false);
   };
 
   const deleteHabit = () => {
-    setHabits(habits.filter(habit => habit.id !== editHabitId));
+    handleDeleteHabit(editHabitId);
     setEditHabitId(null);
     setEditHabitName('');
     setModalVisible(false);
@@ -61,16 +61,16 @@ const Habits = () => {
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <View className="px-7">
-            <TouchableOpacity onPress={() => startEditHabit(item.id)} className="p-5 py-6 mb-5 bg-secpurpe rounded-[30px]">
-              <View className="flex-row items-center justify-between px-2">
-                <Text className="text-xl font-pbold text-gradL">{item.name}</Text>
-                <TouchableOpacity 
-                className="bg-gradR rounded-full w-8 h-8"
-                onPress={() => toggleDone(item.id)}>
-                  <Text className="text-lg font-psemibold text-secpurpe items-center justify-center">{item.done ? '  ✓' : '  ✗'}</Text>
-                </TouchableOpacity>
-              </View>
-            </TouchableOpacity>
+              <TouchableOpacity onPress={() => startEditHabit(item.id)} className="p-5 py-6 mb-5 bg-secpurpe rounded-[30px]">
+                <View className="flex-row items-center justify-between px-2">
+                  <Text className="text-xl font-pbold text-gradL">{item.name}</Text>
+                  <TouchableOpacity 
+                    className="bg-gradR rounded-full w-8 h-8"
+                    onPress={() => toggleDone(item.id)}>
+                    <Text className="text-lg font-psemibold text-secpurpe items-center justify-center">{item.done ? '  ✓' : '  ✗'}</Text>
+                  </TouchableOpacity>
+                </View>
+              </TouchableOpacity>
             </View>
           )}
           ListHeaderComponent={() => (
@@ -81,9 +81,9 @@ const Habits = () => {
                 </View>
               </View>
               <TouchableOpacity
-                   onPress={() => setModalVisible(true)}
-                   className="bg-gradR px-4 py-6 rounded-full items-center justify-center">
-                  <Text className="text-lightpurpe text-2xl font-psemibold">Add Habit</Text>
+                onPress={() => setModalVisible(true)}
+                className="bg-gradR px-4 py-6 rounded-full items-center justify-center">
+                <Text className="text-lightpurpe text-2xl font-psemibold">Add Habit</Text>
               </TouchableOpacity>
             </View>
           )}
@@ -97,27 +97,27 @@ const Habits = () => {
               className="border-[3px] border-gradL p-2 w-full mb-4 rounded-xl font-psemibold text-gradL text-xl"
             />
             <View className="mb-4">
-            <TouchableOpacity 
-              className="bg-gradR px-10 py-5 rounded-full items-center justify-center mb-3"
-              onPress={editHabitId ? saveEditHabit : addHabit}>
-                <Text className="font-psemibold text-secpurpe text-xl">{editHabitId ? "Edit" : "Save"}</Text>
-            </TouchableOpacity>
-            {editHabitId && (
               <TouchableOpacity 
-                 onPress={deleteHabit} 
-                 className="bg-mainred px-10 py-5 rounded-full items-center justify-center mb-3>" >
-              <Text className="font-psemibold text-secred text-xl">Delete</Text>
+                className="bg-gradR px-10 py-5 rounded-full items-center justify-center mb-3"
+                onPress={editHabitId ? saveEditHabit : addHabit}>
+                <Text className="font-psemibold text-secpurpe text-xl">{editHabitId ? "Edit" : "Save"}</Text>
               </TouchableOpacity>
-            )}
-            <TouchableOpacity 
-              className="bg-mainblue px-10 py-5 rounded-full items-center justify-center mt-3"
-              onPress={() => {
-                setModalVisible(false);
-                setEditHabitId(null);
-                setEditHabitName('');
+              {editHabitId && (
+                <TouchableOpacity 
+                  onPress={deleteHabit} 
+                  className="bg-mainred px-10 py-5 rounded-full items-center justify-center mb-3">
+                  <Text className="font-psemibold text-secred text-xl">Delete</Text>
+                </TouchableOpacity>
+              )}
+              <TouchableOpacity 
+                className="bg-mainblue px-10 py-5 rounded-full items-center justify-center mt-3"
+                onPress={() => {
+                  setModalVisible(false);
+                  setEditHabitId(null);
+                  setEditHabitName('');
                 }}>
-              <Text className="font-psemibold text-secblue text-xl">Cancel</Text>
-            </TouchableOpacity>
+                <Text className="font-psemibold text-secblue text-xl">Cancel</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </Modal>

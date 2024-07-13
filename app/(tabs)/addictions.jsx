@@ -6,7 +6,7 @@ import { useRouter } from 'expo-router';
 import { useGlobalContext } from "../../context/GlobalProvider";
 
 const Addictions = () => {
-  const { addictions, setAddictions, addictionStreak, setAddictionStreak } = useGlobalContext();
+  const { addictions, handleAddAddiction, handleUpdateAddiction, handleDeleteAddiction } = useGlobalContext();
   const [modalVisible, setModalVisible] = useState(false);
   const [newAddiction, setNewAddiction] = useState('');
   const [editAddictionId, setEditAddictionId] = useState(null);
@@ -15,39 +15,39 @@ const Addictions = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const resetAddictions = addictions.map(addiction => ({ ...addiction, done: false }));
-      setAddictions(resetAddictions);
+      addictions.forEach(addiction => handleUpdateAddiction(addiction.id, { done: false }));
     }, 24 * 60 * 60 * 1000); // Reset every 24 hours
 
     return () => clearInterval(interval);
   }, [addictions]);
 
   const addAddiction = () => {
-    setAddictions([...addictions, { id: Date.now().toString(), name: newAddiction, done: false }]);
+    handleAddAddiction({ name: newAddiction, done: false });
     setNewAddiction('');
     setModalVisible(false);
   };
 
   const toggleDone = id => {
-    setAddictions(addictions.map(addiction => addiction.id === id ? { ...addiction, done: !addiction.done } : addiction));
+    const addiction = addictions.find(addiction => addiction.id === id);
+    handleUpdateAddiction(id, { done: !addiction.done });
   };
 
   const startEditAddiction = id => {
-    const addiction = addictions.find(a => a.id === id);
+    const addiction = addictions.find(h => h.id === id);
     setEditAddictionId(id);
     setEditAddictionName(addiction.name);
     setModalVisible(true);
   };
 
   const saveEditAddiction = () => {
-    setAddictions(addictions.map(addiction => addiction.id === editAddictionId ? { ...addiction, name: editAddictionName } : addiction));
+    handleUpdateAddiction(editAddictionId, { name: editAddictionName });
     setEditAddictionId(null);
     setEditAddictionName('');
     setModalVisible(false);
   };
 
   const deleteAddiction = () => {
-    setAddictions(addictions.filter(addiction => addiction.id !== editAddictionId));
+    handleDeleteAddiction(editAddictionId);
     setEditAddictionId(null);
     setEditAddictionName('');
     setModalVisible(false);
