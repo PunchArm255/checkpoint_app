@@ -7,6 +7,11 @@ import { images } from '../../constants';
 const About = () => {
   return (
     <LinearGradient colors={['#1c063b', '#080019']} style={{ flex: 1 }}>
+      <Image
+        source={images.glow3}
+        style={StyleSheet.absoluteFillObject}
+        className="w-full h-full absolute contain top-0 left-0"
+      />
       <SafeAreaView className="flex-1 justify-between px-4 mb-[50%]">
         {/* top */}
         <View className="items-center mt-6">
