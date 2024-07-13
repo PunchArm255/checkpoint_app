@@ -13,6 +13,7 @@ const GlobalProvider = ({ children }) => {
   const [habitStreak, setHabitStreak] = useState(0);
   const [addictions, setAddictions] = useState([]);
   const [addictionStreak, setAddictionStreak] = useState(0);
+  const [darkMode, setDarkMode] = useState(false); // New state for dark mode
 
   useEffect(() => {
     const fetchUserAndData = async () => {
@@ -25,7 +26,6 @@ const GlobalProvider = ({ children }) => {
           const userAddictions = await fetchAddictions(currentUser.$id);
           setHabits(userHabits);
           setAddictions(userAddictions);
-          // Calculate streaks for habits and addictions
           let maxHabitStreak = 0;
           let maxAddictionStreak = 0;
           userHabits.forEach(habit => {
@@ -57,7 +57,7 @@ const GlobalProvider = ({ children }) => {
   const handleAddHabit = async (habit) => {
     try {
       const currentUser = await getCurrentUser();
-      const accountId = currentUser.$id; // Use accountId
+      const accountId = currentUser.$id;
       const response = await createHabit({
         ...habit,
         accountId,
@@ -116,7 +116,7 @@ const GlobalProvider = ({ children }) => {
   const handleAddAddiction = async (addiction) => {
     try {
       const currentUser = await getCurrentUser();
-      const accountId = currentUser.$id; // Use accountId
+      const accountId = currentUser.$id;
       const response = await createAddiction({
         ...addiction,
         accountId,
@@ -195,7 +195,9 @@ const GlobalProvider = ({ children }) => {
         handleUpdateAddiction,
         handleDeleteAddiction,
         toggleDone,
-        toggleAddictionDone
+        toggleAddictionDone,
+        darkMode, // Provide darkMode state
+        setDarkMode // Provide setDarkMode function
       }}
     >
       {children}

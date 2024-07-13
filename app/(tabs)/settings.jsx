@@ -1,16 +1,17 @@
 import { StyleSheet, Text, View, TouchableOpacity, Switch, FlatList, Image } from 'react-native';
-import React, { useState } from 'react';
+import React from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { images } from '../../constants';
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 const Settings = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const { darkMode, setDarkMode } = useGlobalContext();
   const router = useRouter();
 
   const handleDarkModeToggle = () => {
-    setIsDarkMode(previousState => !previousState);
+    setDarkMode(previousState => !previousState);
   };
 
   return (
@@ -46,10 +47,10 @@ const Settings = () => {
                   <Text className="text-2xl font-pbold text-gradR">Dark Mode</Text>
                   <Switch
                     trackColor={{ false: "#767577", true: "#81b0ff" }}
-                    thumbColor={isDarkMode ? "#f5dd4b" : "#f4f3f4"}
+                    thumbColor={darkMode ? "#f5dd4b" : "#f4f3f4"}
                     ios_backgroundColor="#3e3e3e"
                     onValueChange={handleDarkModeToggle}
-                    value={isDarkMode}
+                    value={darkMode}
                   />
                 </View>
                 <TouchableOpacity className="p-4 bg-savpurpe rounded-[22px]">

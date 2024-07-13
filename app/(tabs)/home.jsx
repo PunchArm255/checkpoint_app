@@ -9,14 +9,14 @@ import { useGlobalContext } from "../../context/GlobalProvider";
 import { StyleSheet } from 'react-native-web';
 
 const Home = () => {
-  const { user, habits, habitStreak, addictions, addictionStreak } = useGlobalContext();
+  const { user, habits, habitStreak, addictions, addictionStreak, darkMode } = useGlobalContext();
   const router = useRouter();
 
   const habitsLoggedToday = habits.every(habit => habit.done);
   const addictionsLoggedToday = addictions.every(addiction => addiction.done);
 
   return (
-    <LinearGradient colors={['#1c063b', '#080019']} style={{ flex: 1 }}>
+    <LinearGradient colors={darkMode ? ['#000000', '#000000'] : ['#1c063b', '#080019']} style={{ flex: 1 }}>
       <Image
         source={images.glow}
         style={StyleSheet.absoluteFillObject}
@@ -28,19 +28,19 @@ const Home = () => {
             <View className="my-6 px-4 space-y-[1%]">
               <View className="flex justify-center items-start flex-row mb-[1%]">
                 <View>
-                  <Text className="font-psemibold text-sm text-secpurpe">Welcome Back</Text>
+                  <Text className={`font-psemibold text-sm ${darkMode ? 'text-hliba' : 'text-secpurpe'}`}>Welcome Back</Text>
                   <InfoBox
                       title={user?.username}
                       containerStyles="mt-0"
-                      titleStyles="text-3xl font-pbold text-lightpurpe"
+                      titleStyles={`text-3xl font-pbold ${darkMode ? 'text-hliba' : 'text-lightpurpe'}`}
                   />
                 </View>
               </View>
 
               <View className="space-y-8 px-9 h-50 w-50 justify-center items-center">
-                <Text className="text-3xl font-pbold text-secpurpe mt-5">Activity</Text>
+                <Text className={`text-3xl font-pbold mt-5 ${darkMode ? 'text-hliba' : 'text-secpurpe'}`}>Activity</Text>
                 <TouchableOpacity 
-                  className="bg-secpurpe rounded-[40px] p-3 w-[320px] h-[200px] border-hapurpe2 border-2"
+                  className={`rounded-[40px] p-3 w-[320px] h-[200px] border-hapurpe2 border-2 ${darkMode ? 'bg-hliba' : 'bg-secpurpe'}`}
                   onPress={() => router.push('/habits')}
                 >
                   <View className="justify-center pt-5 pl-7 space-y-2 ">
@@ -60,7 +60,7 @@ const Home = () => {
                 </TouchableOpacity>
 
                 <TouchableOpacity 
-                  className="bg-secpurpe rounded-[40px] p-3 w-[320px] h-[200px] border-hapurpe2  border-2"
+                  className={`rounded-[40px] p-3 w-[320px] h-[200px] border-hapurpe2 border-2 ${darkMode ? 'bg-hliba' : 'bg-secpurpe'}`}
                   onPress={() => router.push('/addictions')}
                 >
                   <View className="justify-center pt-5 pl-7 space-y-2">
