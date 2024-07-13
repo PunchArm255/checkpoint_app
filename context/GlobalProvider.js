@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { getCurrentUser, createHabit, updateHabit, deleteHabit, fetchHabits, createAddiction, updateAddiction, deleteAddiction, fetchAddictions } from "../lib/appwrite";
+import moment from 'moment';
 
 const GlobalContext = createContext();
 export const useGlobalContext = () => useContext(GlobalContext);
@@ -24,6 +25,21 @@ const GlobalProvider = ({ children }) => {
           const userAddictions = await fetchAddictions(currentUser.$id);
           setHabits(userHabits);
           setAddictions(userAddictions);
+          // Calculate streaks for habits and addictions
+          let maxHabitStreak = 0;
+          let maxAddictionStreak = 0;
+          userHabits.forEach(habit => {
+            if (habit.streak > maxHabitStreak) {
+              maxHabitStreak = habit.streak;
+            }
+          });
+          userAddictions.forEach(addiction => {
+            if (addiction.streak > maxAddictionStreak) {
+              maxAddictionStreak = addiction.streak;
+            }
+          });
+          setHabitStreak(maxHabitStreak);
+          setAddictionStreak(maxAddictionStreak);
         } else {
           setIsLogged(false);
           setUser(null);
@@ -42,8 +58,13 @@ const GlobalProvider = ({ children }) => {
     try {
       const currentUser = await getCurrentUser();
       const accountId = currentUser.$id; // Use accountId
-      const response = await createHabit(habit, accountId);
-      setHabits([...habits, { id: response.$id, ...habit }]);
+      const response = await createHabit({
+        ...habit,
+        accountId,
+        lastLogDate: null,
+        streak: 0
+      });
+      setHabits([...habits, { id: response.$id, ...habit, lastLogDate: null, streak: 0 }]);
     } catch (error) {
       console.error('Error adding habit:', error);
     }
@@ -55,6 +76,31 @@ const GlobalProvider = ({ children }) => {
       setHabits(habits.map(habit => habit.id === id ? { ...habit, ...data } : habit));
     } catch (error) {
       console.error('Error updating habit:', error);
+    }
+  };
+
+  const toggleDone = async (id) => {
+    try {
+      const habit = habits.find(habit => habit.id === id);
+      const today = moment().startOf('day');
+      const lastLogDate = habit.lastLogDate ? moment(habit.lastLogDate).startOf('day') : null;
+
+      let streak = habit.streak;
+      if (lastLogDate && lastLogDate.isBefore(today, 'day')) {
+        if (lastLogDate.add(1, 'day').isSame(today, 'day')) {
+          streak += 1;
+        } else {
+          streak = 1;
+        }
+      } else if (!lastLogDate) {
+        streak = 1;
+      }
+
+      await handleUpdateHabit(id, { done: !habit.done, lastLogDate: today.toISOString(), streak });
+      setHabits(habits.map(h => h.id === id ? { ...h, done: !h.done, lastLogDate: today.toISOString(), streak } : h));
+      setHabitStreak(streak);
+    } catch (error) {
+      console.error('Error toggling done status:', error);
     }
   };
 
@@ -71,8 +117,13 @@ const GlobalProvider = ({ children }) => {
     try {
       const currentUser = await getCurrentUser();
       const accountId = currentUser.$id; // Use accountId
-      const response = await createAddiction(addiction, accountId);
-      setAddictions([...addictions, { id: response.$id, ...addiction }]);
+      const response = await createAddiction({
+        ...addiction,
+        accountId,
+        lastLogDate: null,
+        streak: 0
+      });
+      setAddictions([...addictions, { id: response.$id, ...addiction, lastLogDate: null, streak: 0 }]);
     } catch (error) {
       console.error('Error adding addiction:', error);
     }
@@ -84,6 +135,31 @@ const GlobalProvider = ({ children }) => {
       setAddictions(addictions.map(addiction => addiction.id === id ? { ...addiction, ...data } : addiction));
     } catch (error) {
       console.error('Error updating addiction:', error);
+    }
+  };
+
+  const toggleAddictionDone = async (id) => {
+    try {
+      const addiction = addictions.find(addiction => addiction.id === id);
+      const today = moment().startOf('day');
+      const lastLogDate = addiction.lastLogDate ? moment(addiction.lastLogDate).startOf('day') : null;
+
+      let streak = addiction.streak;
+      if (lastLogDate && lastLogDate.isBefore(today, 'day')) {
+        if (lastLogDate.add(1, 'day').isSame(today, 'day')) {
+          streak += 1;
+        } else {
+          streak = 1;
+        }
+      } else if (!lastLogDate) {
+        streak = 1;
+      }
+
+      await handleUpdateAddiction(id, { done: !addiction.done, lastLogDate: today.toISOString(), streak });
+      setAddictions(addictions.map(a => a.id === id ? { ...a, done: !a.done, lastLogDate: today.toISOString(), streak } : a));
+      setAddictionStreak(streak);
+    } catch (error) {
+      console.error('Error toggling done status:', error);
     }
   };
 
@@ -118,6 +194,8 @@ const GlobalProvider = ({ children }) => {
         handleAddAddiction,
         handleUpdateAddiction,
         handleDeleteAddiction,
+        toggleDone,
+        toggleAddictionDone
       }}
     >
       {children}

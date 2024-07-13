@@ -40,7 +40,7 @@ const Home = () => {
               <View className="space-y-8 px-9 h-50 w-50 justify-center items-center">
                 <Text className="text-3xl font-pbold text-secpurpe mt-5">Activity</Text>
                 <TouchableOpacity 
-                  className="bg-secpurpe rounded-[40px] p-3 w-[320px] h-[200px] border-hapurpe border-2"
+                  className="bg-secpurpe rounded-[40px] p-3 w-[320px] h-[200px] border-hapurpe2 border-2"
                   onPress={() => router.push('/habits')}
                 >
                   <View className="justify-center pt-5 pl-7 space-y-2 ">
@@ -60,7 +60,7 @@ const Home = () => {
                 </TouchableOpacity>
 
                 <TouchableOpacity 
-                  className="bg-secpurpe rounded-[40px] p-3 w-[320px] h-[200px] border-hapurpe border-2"
+                  className="bg-secpurpe rounded-[40px] p-3 w-[320px] h-[200px] border-hapurpe2  border-2"
                   onPress={() => router.push('/addictions')}
                 >
                   <View className="justify-center pt-5 pl-7 space-y-2">

@@ -1,12 +1,13 @@
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, TextInput, Modal } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, TextInput, Modal, Image } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { useGlobalContext } from "../../context/GlobalProvider";
+import { images } from '../../constants';
 
 const Addictions = () => {
-  const { addictions, setAddictions, addictionStreak, setAddictionStreak } = useGlobalContext();
+  const { addictions, setAddictions, addictionStreak, setAddictionStreak, handleAddAddiction, handleUpdateAddiction, handleDeleteAddiction, toggleAddictionDone } = useGlobalContext();
   const [modalVisible, setModalVisible] = useState(false);
   const [newAddiction, setNewAddiction] = useState('');
   const [editAddictionId, setEditAddictionId] = useState(null);
@@ -14,22 +15,26 @@ const Addictions = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      const resetAddictions = addictions.map(addiction => ({ ...addiction, done: false }));
-      setAddictions(resetAddictions);
-    }, 24 * 60 * 60 * 1000); // Reset every 24 hours
+    const resetAddictionsDaily = () => {
+      const now = new Date();
+      const nextReset = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0, 0);
+      const timeUntilReset = nextReset - now;
 
-    return () => clearInterval(interval);
+      const timeout = setTimeout(() => {
+        addictions.forEach(addiction => handleUpdateAddiction(addiction.id, { done: false }));
+        resetAddictionsDaily(); // Schedule the next reset
+      }, timeUntilReset);
+
+      return () => clearTimeout(timeout);
+    };
+
+    resetAddictionsDaily();
   }, [addictions]);
 
   const addAddiction = () => {
-    setAddictions([...addictions, { id: Date.now().toString(), name: newAddiction, done: false }]);
+    handleAddAddiction({ name: newAddiction, done: false });
     setNewAddiction('');
     setModalVisible(false);
-  };
-
-  const toggleDone = id => {
-    setAddictions(addictions.map(addiction => addiction.id === id ? { ...addiction, done: !addiction.done } : addiction));
   };
 
   const startEditAddiction = id => {
@@ -40,14 +45,14 @@ const Addictions = () => {
   };
 
   const saveEditAddiction = () => {
-    setAddictions(addictions.map(addiction => addiction.id === editAddictionId ? { ...addiction, name: editAddictionName } : addiction));
+    handleUpdateAddiction(editAddictionId, { name: editAddictionName });
     setEditAddictionId(null);
     setEditAddictionName('');
     setModalVisible(false);
   };
 
   const deleteAddiction = () => {
-    setAddictions(addictions.filter(addiction => addiction.id !== editAddictionId));
+    handleDeleteAddiction(editAddictionId);
     setEditAddictionId(null);
     setEditAddictionName('');
     setModalVisible(false);
@@ -55,6 +60,11 @@ const Addictions = () => {
 
   return (
     <LinearGradient colors={['#1c063b', '#080019']} style={{ flex: 1 }}>
+      <Image
+        source={images.glow4}
+        style={StyleSheet.absoluteFillObject}
+        className="w-full h-full absolute contain top-0 left-0"
+      />
       <SafeAreaView>
         <FlatList 
           data={addictions}
@@ -66,7 +76,7 @@ const Addictions = () => {
                   <Text className="text-xl font-pbold text-gradL">{item.name}</Text>
                   <TouchableOpacity 
                     className="bg-gradR rounded-full w-8 h-8"
-                    onPress={() => toggleDone(item.id)}>
+                    onPress={() => toggleAddictionDone(item.id)}>
                     <Text className="text-lg font-psemibold text-secpurpe items-center justify-center">{item.done ? '  ✓' : '  ✗'}</Text>
                   </TouchableOpacity>
                 </View>

@@ -17,6 +17,8 @@ module.exports = {
         secblue: '#99a5d3',
         savpurpe: '#e8d1ff',
         hapurpe: '#6100bc',
+        hapurpe2: '#6100bc',
+        hliba: '#efefef'
       },
       fontFamily: {
         pthin: ["Poppins-Thin", "sans-serif"],

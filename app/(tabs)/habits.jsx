@@ -1,35 +1,23 @@
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, TextInput, Modal } from 'react-native';
-import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, TextInput, Modal, Image } from 'react-native';
+import React, { useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { useGlobalContext } from "../../context/GlobalProvider";
+import { images } from '../../constants';
 
 const Habits = () => {
-  const { habits, handleAddHabit, handleUpdateHabit, handleDeleteHabit } = useGlobalContext();
+  const { habits, handleAddHabit, handleUpdateHabit, handleDeleteHabit, toggleDone } = useGlobalContext();
   const [modalVisible, setModalVisible] = useState(false);
   const [newHabit, setNewHabit] = useState('');
   const [editHabitId, setEditHabitId] = useState(null);
   const [editHabitName, setEditHabitName] = useState('');
   const router = useRouter();
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      habits.forEach(habit => handleUpdateHabit(habit.id, { done: false }));
-    }, 24 * 60 * 60 * 1000); // Reset every 24 hours
-
-    return () => clearInterval(interval);
-  }, [habits]);
-
   const addHabit = () => {
     handleAddHabit({ name: newHabit, done: false });
     setNewHabit('');
     setModalVisible(false);
-  };
-
-  const toggleDone = id => {
-    const habit = habits.find(habit => habit.id === id);
-    handleUpdateHabit(id, { done: !habit.done });
   };
 
   const startEditHabit = id => {
@@ -55,6 +43,11 @@ const Habits = () => {
 
   return (
     <LinearGradient colors={['#1c063b', '#080019']} style={{ flex: 1 }}>
+      <Image
+        source={images.glow3}
+        style={StyleSheet.absoluteFillObject}
+        className="w-full h-full absolute contain top-0 left-0"
+      />
       <SafeAreaView>
         <FlatList 
           data={habits}

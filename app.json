@@ -19,7 +19,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#250c4b"
-      }
+      },
+      "package": "com.puncharm255.checkpoint"
     },
     "web": {
       "bundler": "metro",
