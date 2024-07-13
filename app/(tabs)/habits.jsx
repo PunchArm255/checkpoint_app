@@ -61,7 +61,7 @@ const Habits = () => {
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <View className="px-7">
-              <TouchableOpacity onPress={() => startEditHabit(item.id)} className="p-5 py-6 mb-5 bg-secpurpe rounded-[30px]">
+              <TouchableOpacity onPress={() => startEditHabit(item.id)} className="p-5 py-6 mb-5 bg-secpurpe rounded-[30px] border-hapurpe border-2">
                 <View className="flex-row items-center justify-between px-2">
                   <Text className="text-xl font-pbold text-gradL">{item.name}</Text>
                   <TouchableOpacity 

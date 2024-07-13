@@ -3,9 +3,10 @@ import React from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
-import { icons } from '../../constants';
+import { icons, images } from '../../constants';
 import InfoBox from "../../components/InfoBox";
 import { useGlobalContext } from "../../context/GlobalProvider";
+import { StyleSheet } from 'react-native-web';
 
 const Home = () => {
   const { user, habits, habitStreak, addictions, addictionStreak } = useGlobalContext();
@@ -16,6 +17,11 @@ const Home = () => {
 
   return (
     <LinearGradient colors={['#1c063b', '#080019']} style={{ flex: 1 }}>
+      <Image
+        source={images.glow}
+        style={StyleSheet.absoluteFillObject}
+        className="w-full h-full absolute contain top-0 left-0"
+      />
       <SafeAreaView>
         <FlatList 
           ListHeaderComponent={() => (
@@ -34,7 +40,7 @@ const Home = () => {
               <View className="space-y-8 px-9 h-50 w-50 justify-center items-center">
                 <Text className="text-3xl font-pbold text-secpurpe mt-5">Activity</Text>
                 <TouchableOpacity 
-                  className="bg-secpurpe rounded-[40px] p-3 w-[320px] h-[200px] bg-opacity-10"
+                  className="bg-secpurpe rounded-[40px] p-3 w-[320px] h-[200px] border-hapurpe border-2"
                   onPress={() => router.push('/habits')}
                 >
                   <View className="justify-center pt-5 pl-7 space-y-2 ">
@@ -54,7 +60,7 @@ const Home = () => {
                 </TouchableOpacity>
 
                 <TouchableOpacity 
-                  className="bg-secpurpe rounded-[40px] p-3 w-[320px] h-[200px]"
+                  className="bg-secpurpe rounded-[40px] p-3 w-[320px] h-[200px] border-hapurpe border-2"
                   onPress={() => router.push('/addictions')}
                 >
                   <View className="justify-center pt-5 pl-7 space-y-2">

@@ -1,8 +1,9 @@
-import { StyleSheet, Text, View, TouchableOpacity, Switch, FlatList } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Switch, FlatList, Image } from 'react-native';
 import React, { useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
+import { images } from '../../constants';
 
 const Settings = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -14,6 +15,11 @@ const Settings = () => {
 
   return (
     <LinearGradient colors={['#1c063b', '#080019']} style={{ flex: 1 }}>
+      <Image
+        source={images.glow2}
+        style={StyleSheet.absoluteFillObject}
+        className="w-full h-full absolute contain top-0 left-0"
+      />
       <SafeAreaView>
         <FlatList 
           ListHeaderComponent={() => (

@@ -15,7 +15,8 @@ module.exports = {
         mainred: '#330000',
         mainblue: '#000233',
         secblue: '#99a5d3',
-        savpurpe: '#e8d1ff'
+        savpurpe: '#e8d1ff',
+        hapurpe: '#6100bc',
       },
       fontFamily: {
         pthin: ["Poppins-Thin", "sans-serif"],

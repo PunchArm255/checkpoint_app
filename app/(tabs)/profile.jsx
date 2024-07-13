@@ -4,7 +4,7 @@ import React from 'react'
 import { LinearGradient } from 'expo-linear-gradient'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useGlobalContext } from "../../context/GlobalProvider";
-import { icons } from '../../constants';
+import { icons, images } from '../../constants';
 import InfoBox from "../../components/InfoBox";
 import { signOut } from "../../lib/appwrite";
 
@@ -22,6 +22,11 @@ const Profile = () => {
   };
   return (
     <LinearGradient colors={['#1c063b', '#080019']} style={{ flex: 1 }}>
+      <Image
+        source={images.glow3}
+        style={StyleSheet.absoluteFillObject}
+        className="w-full h-full absolute contain top-0 left-0"
+      />
     <SafeAreaView>
       <FlatList 
          /*data={[{id: 1}, {id: 2}, {id: 3},]}
@@ -58,7 +63,7 @@ const Profile = () => {
 
             <TouchableOpacity
                onPress={logout}
-               className="flex flex-row w-full items-center mb-10 bg-secpurpe px-10 py-5 rounded-full justify-center">
+               className="flex flex-row w-full items-center mb-10 bg-secpurpe px-10 py-5 rounded-full justify-center border-hapurpe border-2">
                   <Text className="text-2xl font-pbold text-gradL">Logout</Text>
                   <Image
                      source={icons.logout}

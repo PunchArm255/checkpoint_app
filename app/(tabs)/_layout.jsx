@@ -115,11 +115,13 @@ const styles = StyleSheet.create({
     left: '15%',
     right: '5%',
     bottom: 10,
-    elevation: 10, // for Android shadow
-    shadowColor: '#2c1f59', // iOS shadow
+    elevation: 8, // for Android shadow
+    shadowColor: '#6100bc', // iOS shadow
     shadowOpacity: 0.1, // iOS shadow
     shadowOffset: { width: 0, height: 4 }, // iOS shadow
     shadowRadius: 20, // iOS shadow
     marginBottom: 20,
+    borderWidth: 1, // Add border width
+    borderColor: '#6100bc',
   }
 });
