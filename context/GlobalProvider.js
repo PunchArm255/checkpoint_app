@@ -59,7 +59,7 @@ const GlobalProvider = ({ children }) => {
       } catch (error) {
         console.error('Error fetching user, habits, or addictions:', error);
       } finally {
-        setLoading(false);
+        setLoading(false); // Set loading to false only after everything is done
       }
     };
 
