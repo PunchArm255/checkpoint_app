@@ -7,7 +7,7 @@ import { useGlobalContext } from "../../context/GlobalProvider";
 import { images } from '../../constants';
 
 const Addictions = () => {
-  const { addictions, setAddictions, addictionStreak, setAddictionStreak, handleAddAddiction, handleUpdateAddiction, handleDeleteAddiction, toggleAddictionDone } = useGlobalContext();
+  const { addictions, setAddictions, addictionStreak, setAddictionStreak, handleAddAddiction, handleUpdateAddiction, handleDeleteAddiction, toggleAddictionDone, darkMode } = useGlobalContext();
   const [modalVisible, setModalVisible] = useState(false);
   const [newAddiction, setNewAddiction] = useState('');
   const [editAddictionId, setEditAddictionId] = useState(null);
@@ -59,7 +59,7 @@ const Addictions = () => {
   };
 
   return (
-    <LinearGradient colors={['#1c063b', '#080019']} style={{ flex: 1 }}>
+    <LinearGradient colors={darkMode ? ['#000000', '#000000'] : ['#1c063b', '#080019']} style={{ flex: 1 }}>
       <Image
         source={images.glow4}
         style={StyleSheet.absoluteFillObject}
@@ -71,13 +71,17 @@ const Addictions = () => {
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <View className="px-7">
-              <TouchableOpacity onPress={() => startEditAddiction(item.id)} className="p-5 py-6 mb-5 bg-secpurpe rounded-[30px] border-hapurpe border-2">
+              <TouchableOpacity 
+                  onPress={() => startEditAddiction(item.id)} 
+                  className={`p-5 py-6 mb-5 rounded-[30px] border-2 ${darkMode ? 'border-fakeGlass' : 'border-hapurpe2'}`}
+                  style={{backgroundColor: darkMode ? 'rgba(239, 239, 239, 0.13)' : '#c5b0ef'}}>
                 <View className="flex-row items-center justify-between px-2">
-                  <Text className="text-xl font-pbold text-gradL">{item.name}</Text>
+                  <Text className={`text-xl font-pbold ${darkMode ? 'text-hliba' : 'text-gradL'}`}>{item.name}</Text>
                   <TouchableOpacity 
-                    className="bg-gradR rounded-full w-8 h-8"
-                    onPress={() => toggleAddictionDone(item.id)}>
-                    <Text className="text-lg font-psemibold text-secpurpe items-center justify-center">{item.done ? '  ✓' : '  ✗'}</Text>
+                    className={`rounded-full w-8 h-8  ${darkMode ? 'border-fakeGlass border-2' : 'undefined'}`}
+                    onPress={() => toggleAddictionDone(item.id)}
+                    style={{backgroundColor: darkMode ? 'rgba(239, 239, 239, 0.13)' : '#2c1f59'}}>
+                    <Text className={`text-lg font-psemibold justify-center items-center ${darkMode ? 'text-hliba' : 'text-secpurpe'}`}>{item.done ? '  ✓' : '  ✗'}</Text>
                   </TouchableOpacity>
                 </View>
               </TouchableOpacity>
@@ -87,13 +91,14 @@ const Addictions = () => {
             <View className="my-6 px-[20%] space-y-6">
               <View className="flex justify-center items-start flex-row mb-6">
                 <View>
-                  <Text className="text-3xl font-pbold text-secpurpe">Addictions</Text>
+                  <Text className={`font-pbold text-3xl ${darkMode ? 'text-hliba' : 'text-secpurpe'}`}>Addictions</Text>
                 </View>
               </View>
               <TouchableOpacity
                 onPress={() => setModalVisible(true)}
-                className="bg-gradR px-4 py-6 rounded-full items-center justify-center">
-                <Text className="text-lightpurpe text-2xl font-psemibold">Add Addiction</Text>
+                className="bg-gradR px-4 py-6 rounded-full items-center justify-center"
+                style={{backgroundColor: darkMode ? 'rgba(239, 239, 239, 0.16)' : '#2c1f59'}}>
+                <Text className={`text-2xl font-psemibold ${darkMode ? 'text-hliba' : 'text-secpurpe'}`}>Add Addiction</Text>
               </TouchableOpacity>
             </View>
           )}

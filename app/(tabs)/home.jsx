@@ -40,41 +40,43 @@ const Home = () => {
               <View className="space-y-8 px-9 h-50 w-50 justify-center items-center">
                 <Text className={`text-3xl font-pbold mt-5 ${darkMode ? 'text-hliba' : 'text-secpurpe'}`}>Activity</Text>
                 <TouchableOpacity 
-                  className={`rounded-[40px] p-3 w-[320px] h-[200px] border-hapurpe2 border-2 ${darkMode ? 'bg-hliba' : 'bg-secpurpe'}`}
+                  className={`rounded-[40px] p-3 w-[320px] h-[200px]  border-2 ${darkMode ? 'border-fakeGlass' : 'border-hapurpe2'}`}
                   onPress={() => router.push('/habits')}
+                  style={{backgroundColor: darkMode ? 'rgba(239, 239, 239, 0.13)' : '#c5b0ef'}}
                 >
                   <View className="justify-center pt-5 pl-7 space-y-2 ">
                     <View className="flex-row items-center">
-                      <Image source={icons.habits} className="w-9 h-9 mr-2 mb-1" />
-                      <Text className="text-3xl font-pbold text-gradL">Habits: {habits.length}</Text>
+                      <Image source={icons.habits} className="w-9 h-9 mr-2 mb-1" tintColor={darkMode ? '#efefef' : '#18154a'} />
+                      <Text className={`text-3xl font-pbold ${darkMode ? 'text-hliba' : 'text-gradL'}`}>Habits: {habits.length}</Text>
                     </View>
                     <View className="flex-row items-center">
-                      <Image source={icons.calendar} className="w-9 h-9 mr-2 mb-1" />
-                      <Text className="text-3xl font-pbold text-gradL">Daily Log: {habitsLoggedToday ? '✓' : '✗'}</Text>
+                      <Image source={icons.calendar} className="w-9 h-9 mr-2 mb-1" tintColor={darkMode ? '#efefef' : '#18154a'} />
+                      <Text className={`text-3xl font-pbold ${darkMode ? 'text-hliba' : 'text-gradL'}`}>Daily Log: {habitsLoggedToday ? '✓' : '✗'}</Text>
                     </View>
                     <View className="flex-row items-center">
-                      <Image source={icons.streak} className="w-9 h-9 mr-2 mb-1" />
-                      <Text className="text-3xl font-pbold text-gradL">Streak: {habitStreak}</Text>
+                      <Image source={icons.streak} className="w-9 h-9 mr-2 mb-1" tintColor={darkMode ? '#efefef' : '#18154a'} />
+                      <Text className={`text-3xl font-pbold ${darkMode ? 'text-hliba' : 'text-gradL'}`}>Streak: {habitStreak}</Text>
                     </View>
                   </View>
                 </TouchableOpacity>
 
                 <TouchableOpacity 
-                  className={`rounded-[40px] p-3 w-[320px] h-[200px] border-hapurpe2 border-2 ${darkMode ? 'bg-hliba' : 'bg-secpurpe'}`}
+                  className={`rounded-[40px] p-3 w-[320px] h-[200px] border-2 ${darkMode ? 'border-fakeGlass' : 'border-hapurpe2'}`}
                   onPress={() => router.push('/addictions')}
+                  style={{backgroundColor: darkMode ? 'rgba(239, 239, 239, 0.13)' : '#c5b0ef'}}
                 >
                   <View className="justify-center pt-5 pl-7 space-y-2">
                     <View className="flex-row items-center">
-                      <Image source={icons.addictions} className="w-9 h-9 mr-2 mb-1" />
-                      <Text className="text-3xl font-pbold text-gradL">Addictions: {addictions.length}</Text>
+                      <Image source={icons.addictions} className="w-9 h-9 mr-2 mb-1" tintColor={darkMode ? '#efefef' : '#18154a'} />
+                      <Text className={`text-3xl font-pbold ${darkMode ? 'text-hliba' : 'text-gradL'}`}>Addictions: {addictions.length}</Text>
                     </View>
                     <View className="flex-row items-center">
-                      <Image source={icons.calendar} className="w-9 h-9 mr-2 mb-1" />
-                      <Text className="text-3xl font-pbold text-gradL">Daily Log: {addictionsLoggedToday ? '✓' : '✗'}</Text>
+                      <Image source={icons.calendar} className="w-9 h-9 mr-2 mb-1" tintColor={darkMode ? '#efefef' : '#18154a'} />
+                      <Text className={`text-3xl font-pbold ${darkMode ? 'text-hliba' : 'text-gradL'}`}>Daily Log: {addictionsLoggedToday ? '✓' : '✗'}</Text>
                     </View>
                     <View className="flex-row items-center">
-                      <Image source={icons.streak} className="w-9 h-9 mr-2 mb-1" />
-                      <Text className="text-3xl font-pbold text-gradL">Streak: {addictionStreak}</Text>
+                      <Image source={icons.streak} className="w-9 h-9 mr-2 mb-1" tintColor={darkMode ? '#efefef' : '#18154a'} />
+                      <Text className={`text-3xl font-pbold ${darkMode ? 'text-hliba' : 'text-gradL'}`}>Streak: {addictionStreak}</Text>
                     </View>
                   </View>
                 </TouchableOpacity>

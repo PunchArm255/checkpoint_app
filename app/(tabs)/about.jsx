@@ -3,10 +3,12 @@ import React from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { images } from '../../constants';
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 const About = () => {
+  const { darkMode } = useGlobalContext();
   return (
-    <LinearGradient colors={['#1c063b', '#080019']} style={{ flex: 1 }}>
+    <LinearGradient colors={darkMode ? ['#000000', '#000000'] : ['#1c063b', '#080019']} style={{ flex: 1 }}>
       <Image
         source={images.glow3}
         style={StyleSheet.absoluteFillObject}

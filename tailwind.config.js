@@ -18,7 +18,9 @@ module.exports = {
         savpurpe: '#e8d1ff',
         hapurpe: '#6100bc',
         hapurpe2: '#6100bc',
-        hliba: '#efefef'
+        hliba: '#efefef',
+        darkaHliba: '#8c8c8c',
+        fakeGlass: 'rgba(239, 239, 239, 0.17)',
       },
       fontFamily: {
         pthin: ["Poppins-Thin", "sans-serif"],

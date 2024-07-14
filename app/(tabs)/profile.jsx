@@ -11,7 +11,7 @@ import { signOut } from "../../lib/appwrite";
 
 const Profile = () => {
 
-  const { user, setUser, setIsLogged } = useGlobalContext();
+  const { user, setUser, setIsLogged, darkMode } = useGlobalContext();
 
   const logout = async () => {
     await signOut();
@@ -21,7 +21,7 @@ const Profile = () => {
     router.replace("/sign-in");
   };
   return (
-    <LinearGradient colors={['#1c063b', '#080019']} style={{ flex: 1 }}>
+    <LinearGradient colors={darkMode ? ['#000000', '#000000'] : ['#1c063b', '#080019']} style={{ flex: 1 }}>
       <Image
         source={images.glow3}
         style={StyleSheet.absoluteFillObject}
@@ -38,7 +38,7 @@ const Profile = () => {
           <View className="my-7 px-4 space-y-6">
             <View className="flex justify-center items-start flex-row mb-6">
               <View>
-                <Text className="text-3xl font-pbold text-secpurpe">Profile</Text>
+                <Text className={`font-pbold text-3xl ${darkMode ? 'text-hliba' : 'text-secpurpe'}`}>Profile</Text>
               </View>
             </View>
           </View>
@@ -47,7 +47,7 @@ const Profile = () => {
          
          ListEmptyComponent={() => (
           <View className="w-full flex justify-center items-center mt-6 mb-12 px-[25%]">
-            <View className="w-[100px] h-[100px] border-2 border-secpurpe rounded-full flex justify-center items-center">
+            <View className={`w-[100px] h-[100px] border-2 ${darkMode ? 'border-hliba' : 'border-secpurpe'} rounded-full flex justify-center items-center`}>
               <Image
                 source={{ uri: user?.avatar }}
                 className="w-[90%] h-[90%] rounded-full"
@@ -58,13 +58,15 @@ const Profile = () => {
             <InfoBox
               title={user?.username}
               containerStyles="mt-3"
-              titleStyles="text-2xl text-lightpurpe font-pbold"
+              titleStyles={`text-2xl ${darkMode ? 'text-hliba' : 'text-lightpurpe'} font-pbold`}
             />
 
             <TouchableOpacity
                onPress={logout}
-               className="flex flex-row w-full items-center mb-10 bg-secpurpe px-10 py-5 rounded-full justify-center border-hapurpe border-2">
-                  <Text className="text-2xl font-pbold text-gradL">Logout</Text>
+               className={`flex flex-row w-full items-center mb-10 ${darkMode ? 'border-fakeGlass' : 'border-hapurpe'} px-10 py-5 rounded-full justify-center  border-2`}
+               style={{backgroundColor: darkMode ? 'rgba(239, 239, 239, 0.13)' : '#c5b0ef'}}>
+                
+                  <Text className={`text-2xl font-pbold ${darkMode ? 'text-hliba' : 'text-gradL'}`}>Logout</Text>
                   <Image
                      source={icons.logout}
                      resizeMode="contain"

@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getCurrentUser, createHabit, updateHabit, deleteHabit, fetchHabits, createAddiction, updateAddiction, deleteAddiction, fetchAddictions } from "../lib/appwrite";
 import moment from 'moment';
 
@@ -13,9 +14,20 @@ const GlobalProvider = ({ children }) => {
   const [habitStreak, setHabitStreak] = useState(0);
   const [addictions, setAddictions] = useState([]);
   const [addictionStreak, setAddictionStreak] = useState(0);
-  const [darkMode, setDarkMode] = useState(false); // New state for dark mode
+  const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
+    const fetchPreferences = async () => {
+      try {
+        const darkModePreference = await AsyncStorage.getItem('darkMode');
+        if (darkModePreference !== null) {
+          setDarkMode(JSON.parse(darkModePreference));
+        }
+      } catch (error) {
+        console.error('Error loading dark mode preference:', error);
+      }
+    };
+
     const fetchUserAndData = async () => {
       try {
         const currentUser = await getCurrentUser();
@@ -51,6 +63,7 @@ const GlobalProvider = ({ children }) => {
       }
     };
 
+    fetchPreferences();
     fetchUserAndData();
   }, []);
 
@@ -196,8 +209,8 @@ const GlobalProvider = ({ children }) => {
         handleDeleteAddiction,
         toggleDone,
         toggleAddictionDone,
-        darkMode, // Provide darkMode state
-        setDarkMode // Provide setDarkMode function
+        darkMode,
+        setDarkMode
       }}
     >
       {children}

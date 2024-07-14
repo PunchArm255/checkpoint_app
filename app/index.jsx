@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { ScrollView, Text, View, Image } from 'react-native';
+import { ScrollView, Text, View, Image, StyleSheet } from 'react-native';
 import { Redirect, router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { images } from '../constants';
@@ -8,12 +8,17 @@ import {LinearGradient} from 'expo-linear-gradient';
 import { useGlobalContext } from "../context/GlobalProvider";
 
 const Welcome = () => {
-  const { loading, isLogged } = useGlobalContext();
+  const { loading, isLogged, darkMode } = useGlobalContext();
 
   if (!loading && isLogged) return <Redirect href="/home" />;
 
   return (
-    <LinearGradient colors={['#1c063b', '#080019']} style={{ flex: 1 }}>
+    <LinearGradient colors={darkMode ? ['#000000', '#000000'] : ['#1c063b', '#080019']} style={{ flex: 1 }}>
+      <Image
+        source={images.glow4}
+        style={StyleSheet.absoluteFillObject}
+        className="w-full h-full absolute contain top-0 left-0"
+      />
       <SafeAreaView style={{ flex: 1 }}>
         <ScrollView contentContainerStyle={{ height: '100%' }}>
           <View className="w-full justify-center items-center min-h-[88vh] px-4  space-y-1">
@@ -36,11 +41,11 @@ const Welcome = () => {
                 handlePress={() => router.push('/sign-in')}
                 containerStyles="mt-8"
               />
-              <CustomButton 
+              {/*<CustomButton 
                 title="Continue without account"
                 handlePress={() => router.push('/home')}
                 containerStyles="mt-7"
-              />
+              />*/}
             </View>
           </View>
         </ScrollView>
