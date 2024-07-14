@@ -65,7 +65,7 @@ const Welcome = () => {
       <CustomAlert
         visible={alertVisible}
         title="Hi there!"
-        message="Thank you for downloading ❤️ Just so you know, this is a prototype version of the app, somethings may not work as expected."
+        message="Thank you for downloading ❤️ Just so you know, this is a pre-alpha version of the app, somethings may not work as expected."
         onClose={() => router.push('/sign-in')}
       />
     </LinearGradient>
