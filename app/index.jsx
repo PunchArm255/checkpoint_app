@@ -1,4 +1,3 @@
-// Welcome.jsx
 import { StatusBar } from 'expo-status-bar';
 import { ScrollView, Text, View, Image, StyleSheet } from 'react-native';
 import { Redirect, router } from 'expo-router';
@@ -7,22 +6,11 @@ import { images } from '../constants';
 import CustomButton from '../components/CustomButton';
 import {LinearGradient} from 'expo-linear-gradient';
 import { useGlobalContext } from "../context/GlobalProvider";
-import { useState } from 'react';
-import CustomAlert from '../components/CustomAlert';
 
 const Welcome = () => {
   const { loading, isLogged, darkMode } = useGlobalContext();
-  const [alertVisible, setAlertVisible] = useState(false);
 
   if (!loading && isLogged) return <Redirect href="/home" />;
-
-  const showAlert = () => {
-    setAlertVisible(true);
-  };
-
-  const closeAlert = () => {
-    setAlertVisible(false);
-  };
 
   return (
     <LinearGradient colors={darkMode ? ['#000000', '#000000'] : ['#1c063b', '#080019']} style={{ flex: 1 }}>
@@ -50,7 +38,7 @@ const Welcome = () => {
               </Text>
               <CustomButton 
                 title="Continue with Email"
-                handlePress={showAlert}
+                handlePress={() => router.push('/sign-in')}
                 containerStyles="mt-8"
               />
               {/*<CustomButton 
@@ -62,12 +50,6 @@ const Welcome = () => {
           </View>
         </ScrollView>
       </SafeAreaView>
-      <CustomAlert
-        visible={alertVisible}
-        title="Hi there!"
-        message="Thank you for downloading ❤️ Just so you know, this is a pre-alpha version of the app, somethings may not work as expected."
-        onClose={() => router.push('/sign-in')}
-      />
     </LinearGradient>
   );
 };
