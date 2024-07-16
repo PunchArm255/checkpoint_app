@@ -22,7 +22,7 @@ const Welcome = () => {
   return (
     <LinearGradient colors={darkMode ? ['#000000', '#000000'] : ['#1c063b', '#080019']} style={{ flex: 1 }}>
       <Image
-        source={images.glow4}
+        source={images.glow3}
         style={StyleSheet.absoluteFillObject}
         className="w-full h-full absolute contain top-0 left-0"
       />
@@ -30,17 +30,17 @@ const Welcome = () => {
         <ScrollView contentContainerStyle={{ height: '100%' }}>
           <View className="w-full justify-center items-center min-h-[88vh] px-4  space-y-1">
             <Image 
-               source={images.logo}
+               source={darkMode ? images.logo3 : images.logo}
                className="w-[320px] h-[150px]"
                resizeMode="contain"
             />
             <Image 
-               source={images.cards}
+               source={darkMode ? images.cards2 : images.cards}
                className="max-w-[420px] w-full h-[340px] mt-[7%]"
                resizeMode="contain"
             />
             <View className="relative mt-[1%] px-4">
-              <Text className="text-3xl text-secpurpe font-psemibold text-center">
+              <Text className={`text-3xl ${darkMode ? 'text-hliba' : 'text-secpurpe'} font-psemibold text-center`}>
                 Track your habits, conquer your addictions, transform your life.
               </Text>
               <CustomButton 
