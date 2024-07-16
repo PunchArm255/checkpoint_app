@@ -4,13 +4,20 @@ import { Redirect, router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { images } from '../constants';
 import CustomButton from '../components/CustomButton';
-import {LinearGradient} from 'expo-linear-gradient';
+import { LinearGradient } from 'expo-linear-gradient';
 import { useGlobalContext } from "../context/GlobalProvider";
+import LoadingScreen from '../components/LoadingScreen'; // Import the LoadingScreen component
 
 const Welcome = () => {
   const { loading, isLogged, darkMode } = useGlobalContext();
 
-  if (!loading && isLogged) return <Redirect href="/home" />;
+  if (loading) {
+    return <LoadingScreen />;
+  }
+
+  if (isLogged) {
+    return <Redirect href="/home" />;
+  }
 
   return (
     <LinearGradient colors={darkMode ? ['#000000', '#000000'] : ['#1c063b', '#080019']} style={{ flex: 1 }}>
@@ -41,11 +48,6 @@ const Welcome = () => {
                 handlePress={() => router.push('/sign-in')}
                 containerStyles="mt-8"
               />
-              {/*<CustomButton 
-                title="Continue without account"
-                handlePress={() => router.push('/home')}
-                containerStyles="mt-7"
-              />*/}
             </View>
           </View>
         </ScrollView>

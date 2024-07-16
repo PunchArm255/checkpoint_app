@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { useGlobalContext } from "../../context/GlobalProvider";
 import { images } from '../../constants';
+import { BarIndicator } from 'react-native-indicators';
 
 const Addictions = () => {
   const { addictions, setAddictions, addictionStreak, setAddictionStreak, handleAddAddiction, handleUpdateAddiction, handleDeleteAddiction, toggleAddictionDone, darkMode } = useGlobalContext();
@@ -12,6 +13,7 @@ const Addictions = () => {
   const [newAddiction, setNewAddiction] = useState('');
   const [editAddictionId, setEditAddictionId] = useState(null);
   const [editAddictionName, setEditAddictionName] = useState('');
+  const [isAddingAddiction, setIsAddingAddiction] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -31,10 +33,12 @@ const Addictions = () => {
     resetAddictionsDaily();
   }, [addictions]);
 
-  const addAddiction = () => {
-    handleAddAddiction({ name: newAddiction, done: false });
+  const addAddiction = async () => {
+    setIsAddingAddiction(true);
+    await handleAddAddiction({ name: newAddiction, done: false });
     setNewAddiction('');
     setModalVisible(false);
+    setIsAddingAddiction(false);
   };
 
   const startEditAddiction = id => {
@@ -44,15 +48,15 @@ const Addictions = () => {
     setModalVisible(true);
   };
 
-  const saveEditAddiction = () => {
-    handleUpdateAddiction(editAddictionId, { name: editAddictionName });
+  const saveEditAddiction = async () => {
+    await handleUpdateAddiction(editAddictionId, { name: editAddictionName });
     setEditAddictionId(null);
     setEditAddictionName('');
     setModalVisible(false);
   };
 
-  const deleteAddiction = () => {
-    handleDeleteAddiction(editAddictionId);
+  const deleteAddiction = async () => {
+    await handleDeleteAddiction(editAddictionId);
     setEditAddictionId(null);
     setEditAddictionName('');
     setModalVisible(false);
@@ -105,35 +109,41 @@ const Addictions = () => {
         />
         <Modal visible={modalVisible} animationType="slide">
           <View className="px-10 bg-secpurpe flex-1 justify-center items-center">
-            <TextInput 
-              placeholder="Addiction Name"
-              value={editAddictionId ? editAddictionName : newAddiction}
-              onChangeText={text => editAddictionId ? setEditAddictionName(text) : setNewAddiction(text)}
-              className="border-[3px] border-gradL p-2 w-full mb-4 rounded-xl font-psemibold text-gradL text-xl"
-            />
-            <View className="mb-4">
-              <TouchableOpacity 
-                className="bg-gradR px-10 py-5 rounded-full items-center justify-center mb-3"
-                onPress={editAddictionId ? saveEditAddiction : addAddiction}>
-                <Text className="font-psemibold text-secpurpe text-xl">{editAddictionId ? "Edit" : "Save"}</Text>
-              </TouchableOpacity>
-              {editAddictionId && (
-                <TouchableOpacity 
-                  onPress={deleteAddiction} 
-                  className="bg-mainred px-10 py-5 rounded-full items-center justify-center mb-3">
-                  <Text className="font-psemibold text-secred text-xl">Delete</Text>
-                </TouchableOpacity>
-              )}
-              <TouchableOpacity 
-                className="bg-mainblue px-10 py-5 rounded-full items-center justify-center mt-3"
-                onPress={() => {
-                  setModalVisible(false);
-                  setEditAddictionId(null);
-                  setEditAddictionName('');
-                }}>
-                <Text className="font-psemibold text-secblue text-xl">Cancel</Text>
-              </TouchableOpacity>
-            </View>
+            {isAddingAddiction ? (
+              <BarIndicator count={5} color={darkMode ? "#18154a" : "#18154a"} />
+            ) : (
+              <>
+                <TextInput 
+                  placeholder="Addiction Name"
+                  value={editAddictionId ? editAddictionName : newAddiction}
+                  onChangeText={text => editAddictionId ? setEditAddictionName(text) : setNewAddiction(text)}
+                  className="border-[3px] border-gradL p-2 w-full mb-4 rounded-xl font-psemibold text-gradL text-xl"
+                />
+                <View className="mb-4">
+                  <TouchableOpacity 
+                    className="bg-gradR px-10 py-5 rounded-full items-center justify-center mb-3"
+                    onPress={editAddictionId ? saveEditAddiction : addAddiction}>
+                    <Text className="font-psemibold text-secpurpe text-xl">{editAddictionId ? "Edit" : "Save"}</Text>
+                  </TouchableOpacity>
+                  {editAddictionId && (
+                    <TouchableOpacity 
+                      onPress={deleteAddiction} 
+                      className="bg-mainred px-10 py-5 rounded-full items-center justify-center mb-3">
+                      <Text className="font-psemibold text-secred text-xl">Delete</Text>
+                    </TouchableOpacity>
+                  )}
+                  <TouchableOpacity 
+                    className="bg-mainblue px-10 py-5 rounded-full items-center justify-center mt-3"
+                    onPress={() => {
+                      setModalVisible(false);
+                      setEditAddictionId(null);
+                      setEditAddictionName('');
+                    }}>
+                    <Text className="font-psemibold text-secblue text-xl">Cancel</Text>
+                  </TouchableOpacity>
+                </View>
+              </>
+            )}
           </View>
         </Modal>
       </SafeAreaView>

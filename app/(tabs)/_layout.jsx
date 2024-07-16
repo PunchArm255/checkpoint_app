@@ -123,6 +123,12 @@ const TabsLayout = () => {
             headerShown: false,
             tabBarButton: () => null }}
         />
+        <Tabs.Screen
+          name="language"
+          options={{
+            headerShown: false,
+            tabBarButton: () => null }}
+        />
       </Tabs>
     </>
   );

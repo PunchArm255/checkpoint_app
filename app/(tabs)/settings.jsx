@@ -48,7 +48,7 @@ const Settings = () => {
               {/* Preferences Box */}
               <View className="rounded-[30px] p-4 space-y-4" style={{backgroundColor: darkMode ? 'rgba(239, 239, 239, 0.13)' : '#c5b0ef'}}>
                 <TouchableOpacity className="p-4 rounded-[22px]" style={{backgroundColor: darkMode ? 'rgba(239, 239, 239, 0.13)' : '#e8d1ff'}}>
-                  <Text className={`text-2xl font-pbold ${darkMode ? 'text-hliba' : 'text-gradL'}`}>Language</Text>
+                  <Text className={`text-2xl font-pbold ${darkMode ? 'text-hliba' : 'text-gradL'}`} onPress={() => router.push('/language')}>Language</Text>
                 </TouchableOpacity>
                 <View className="p-4 rounded-[22px] flex-row justify-between items-center" style={{backgroundColor: darkMode ? 'rgba(239, 239, 239, 0.13)' : '#e8d1ff'}}>
                   <Text className={`text-2xl font-pbold ${darkMode ? 'text-hliba' : 'text-gradL'}`}>Dark Mode</Text>

@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { useGlobalContext } from "../../context/GlobalProvider";
 import { images } from '../../constants';
+import { BarIndicator } from 'react-native-indicators';
 
 const Habits = () => {
   const { habits, handleAddHabit, handleUpdateHabit, handleDeleteHabit, toggleDone, darkMode } = useGlobalContext();
@@ -12,12 +13,15 @@ const Habits = () => {
   const [newHabit, setNewHabit] = useState('');
   const [editHabitId, setEditHabitId] = useState(null);
   const [editHabitName, setEditHabitName] = useState('');
+  const [isAddingHabit, setIsAddingHabit] = useState(false);
   const router = useRouter();
 
-  const addHabit = () => {
-    handleAddHabit({ name: newHabit, done: false });
+  const addHabit = async () => {
+    setIsAddingHabit(true);
+    await handleAddHabit({ name: newHabit, done: false });
     setNewHabit('');
     setModalVisible(false);
+    setIsAddingHabit(false);
   };
 
   const startEditHabit = id => {
@@ -27,15 +31,15 @@ const Habits = () => {
     setModalVisible(true);
   };
 
-  const saveEditHabit = () => {
-    handleUpdateHabit(editHabitId, { name: editHabitName });
+  const saveEditHabit = async () => {
+    await handleUpdateHabit(editHabitId, { name: editHabitName });
     setEditHabitId(null);
     setEditHabitName('');
     setModalVisible(false);
   };
 
-  const deleteHabit = () => {
-    handleDeleteHabit(editHabitId);
+  const deleteHabit = async () => {
+    await handleDeleteHabit(editHabitId);
     setEditHabitId(null);
     setEditHabitName('');
     setModalVisible(false);
@@ -88,35 +92,41 @@ const Habits = () => {
         />
         <Modal visible={modalVisible} animationType="slide">
           <View className="px-10 bg-secpurpe flex-1 justify-center items-center">
-            <TextInput 
-              placeholder="Habit Name"
-              value={editHabitId ? editHabitName : newHabit}
-              onChangeText={text => editHabitId ? setEditHabitName(text) : setNewHabit(text)}
-              className="border-[3px] border-gradL p-2 w-full mb-4 rounded-xl font-psemibold text-gradL text-xl"
-            />
-            <View className="mb-4">
-              <TouchableOpacity 
-                className="bg-gradR px-10 py-5 rounded-full items-center justify-center mb-3"
-                onPress={editHabitId ? saveEditHabit : addHabit}>
-                <Text className="font-psemibold text-secpurpe text-xl">{editHabitId ? "Edit" : "Save"}</Text>
-              </TouchableOpacity>
-              {editHabitId && (
-                <TouchableOpacity 
-                  onPress={deleteHabit} 
-                  className="bg-mainred px-10 py-5 rounded-full items-center justify-center mb-3">
-                  <Text className="font-psemibold text-secred text-xl">Delete</Text>
-                </TouchableOpacity>
-              )}
-              <TouchableOpacity 
-                className="bg-mainblue px-10 py-5 rounded-full items-center justify-center mt-3"
-                onPress={() => {
-                  setModalVisible(false);
-                  setEditHabitId(null);
-                  setEditHabitName('');
-                }}>
-                <Text className="font-psemibold text-secblue text-xl">Cancel</Text>
-              </TouchableOpacity>
-            </View>
+            {isAddingHabit ? (
+              <BarIndicator count={5} color={darkMode ? "#18154a" : "#18154a"} />
+            ) : (
+              <>
+                <TextInput 
+                  placeholder="Habit Name"
+                  value={editHabitId ? editHabitName : newHabit}
+                  onChangeText={text => editHabitId ? setEditHabitName(text) : setNewHabit(text)}
+                  className="border-[3px] border-gradL p-2 w-full mb-4 rounded-xl font-psemibold text-gradL text-xl"
+                />
+                <View className="mb-4">
+                  <TouchableOpacity 
+                    className="bg-gradR px-10 py-5 rounded-full items-center justify-center mb-4"
+                    onPress={editHabitId ? saveEditHabit : addHabit}>
+                    <Text className="font-psemibold text-secpurpe text-xl">{editHabitId ? "Edit" : "Save"}</Text>
+                  </TouchableOpacity>
+                  {editHabitId && (
+                    <TouchableOpacity 
+                      onPress={deleteHabit} 
+                      className="bg-mainred px-10 py-5 rounded-full items-center justify-center mb-3">
+                      <Text className="font-psemibold text-secred text-xl">Delete</Text>
+                    </TouchableOpacity>
+                  )}
+                  <TouchableOpacity 
+                    className="bg-mainblue px-10 py-5 rounded-full items-center justify-center mt-1"
+                    onPress={() => {
+                      setModalVisible(false);
+                      setEditHabitId(null);
+                      setEditHabitName('');
+                    }}>
+                    <Text className="font-psemibold text-secblue text-xl">Cancel</Text>
+                  </TouchableOpacity>
+                </View>
+              </>
+            )}
           </View>
         </Modal>
       </SafeAreaView>
