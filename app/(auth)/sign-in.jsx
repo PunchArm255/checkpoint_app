@@ -37,7 +37,7 @@ const SignIn = () => {
       const userAddictions = await fetchAddictions();
       setAddictions(userAddictions.map(addiction => ({ id: addiction.$id, ...addiction })));
 
-      Alert.alert("Success", "User signed in successfully");
+      Alert.alert("Hi there!", "Thank you for downloading ❤️ Just so you know, this is a pre-alpha version of the app, somethings may not work as expected.");
       router.replace("/home");
     } catch (error) {
       Alert.alert("Error", error.message);
