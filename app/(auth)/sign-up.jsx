@@ -1,4 +1,4 @@
-import { View, Text, Image, Alert, ScrollView } from 'react-native';
+import { View, Text, Image, Alert, ScrollView, StyleSheet } from 'react-native';
 import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { images } from '../../constants';
@@ -11,7 +11,7 @@ import { createUser, getCurrentUser, fetchHabits, fetchAddictions } from '../../
 import { useGlobalContext } from "../../context/GlobalProvider";
 
 const SignUp = () => {
-  const { setUser, setIsLogged, setHabits, setAddictions } = useGlobalContext();
+  const { setUser, setIsLogged, setHabits, setAddictions, darkMode } = useGlobalContext();
   const [isSubmitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
     username: "",
@@ -46,12 +46,17 @@ const SignUp = () => {
   };
   
   return (
-    <LinearGradient colors={['#1c063b', '#080019']} style={{ flex: 1 }}>
+    <LinearGradient colors={darkMode ? ['#000000', '#000000'] : ['#1c063b', '#080019']} style={{ flex: 1 }}>
+      <Image
+        source={images.glow4}
+        style={StyleSheet.absoluteFillObject}
+        className="w-full h-full absolute contain top-0 left-0"
+      />
       <SafeAreaView className="bg-primary h-full">
         <ScrollView>
-          <View className="w-full justify-center min-h-[84vh] px-5 my-[6%]">
-            <Image source={images.logo2} resizeMode='contain' className="w-[280px] h-[80]" />
-            <Text className="text-2xl text-secpurpe text-bold font-pbold">
+        <View className="w-full justify-center min-h-[75vh] px-7 my-[4%]">
+            <Image source={images.logo2} resizeMode='contain' className="w-[280px] h-[80]" tintColor={darkMode ? '#eee0fe' : '#c5b0ef'} />
+            <Text className={`text-2xl ${darkMode ? "text-lightpurpe" : "text-secpurpe" } text-bold font-pbold`}>
               Create your account
             </Text>
             <FormField 
@@ -80,10 +85,10 @@ const SignUp = () => {
               isLoading={isSubmitting}
             />
             <View className="justify-center pt-5 flex-row gap-2">
-              <Text className="text-lg text-lightpurpe font-pregular">
+              <Text className={`text-lg ${darkMode ? 'text-hliba' : 'text-lightpurpe'} font-pregular`}>
                 Already signed up?
               </Text>
-              <Link href="/sign-in" className="text-lg font-psemibold first-letter:text-secpurpe">Sign In</Link>
+              <Link href="/sign-in" className={`text-lg font-psemibold ${darkMode ? 'first-letter:text-hliba' : 'first-letter:text-secpurpe'} `}>Sign In</Link>
             </View>
           </View>
         </ScrollView>

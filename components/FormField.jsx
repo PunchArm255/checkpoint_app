@@ -1,12 +1,14 @@
 import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native'
 import React, {useState} from 'react'
 import { icons } from '../constants'
+import { useGlobalContext } from "../context/GlobalProvider";
 
 const FormField = ({title, value, placeholder, handleChangeText, otherStyles, ...props}) => {
+  const { darkMode } = useGlobalContext();
   const [showPassword, setshowPassword] = useState(false)
   return (
     <View className={`space-y-2 ${otherStyles}`}>
-      <Text className="text-base text-secpurpe font-pmedium">{title}</Text>
+      <Text className={`text-base ${darkMode ? 'text-lightpurpe' : 'text-secpurpe'} font-pmedium`}>{title}</Text>
       <View className="w-full h-16 px-4 bg-lightpurpe rounded-2xl focus:border-khder items-center flex-row">
         <TextInput 
           className="flex-1 text-mainpurpe font-psemibold text-base"
