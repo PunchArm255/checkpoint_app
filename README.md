@@ -14,6 +14,7 @@ Checkpoint is a habit and addiction tracker application built with React Native 
 ## Screenshots
 
 ![preview banner](https://github.com/user-attachments/assets/8166f9a5-76f3-4dc4-9084-8d927c12f24a)
+![preview bannerD](https://github.com/user-attachments/assets/cbe8ac9b-73a9-4a0b-a323-e2ee91322bcf)
 
 ## Technologies Used
 
