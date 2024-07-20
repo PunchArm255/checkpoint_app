@@ -91,32 +91,33 @@ const Habits = () => {
           )}
         />
         <Modal visible={modalVisible} animationType="slide">
-          <View className="px-10 bg-secpurpe flex-1 justify-center items-center">
+          <View className={`px-10 ${darkMode ? 'bg-black' : 'bg-secpurpe'} flex-1 justify-center items-center`}>
             {isAddingHabit ? (
               <BarIndicator count={5} color={darkMode ? "#18154a" : "#18154a"} />
             ) : (
               <>
                 <TextInput 
-                  placeholder="Habit Name"
+                  placeholder="Type your habit"
+                  placeholderTextColor={darkMode ? 'rgba(239, 239, 239, 0.30)' : 'undefined'}
                   value={editHabitId ? editHabitName : newHabit}
                   onChangeText={text => editHabitId ? setEditHabitName(text) : setNewHabit(text)}
-                  className="border-[3px] border-gradL p-2 w-full mb-4 rounded-xl font-psemibold text-gradL text-xl"
+                  className={`border-[3px] text-lg p-3 w-full mb-4 rounded-2xl font-psemibold ${darkMode ? 'border-fakeGlass text-hliba bg-fakeGlass ' : 'border-gradL text-gradL'} `}
                 />
                 <View className="mb-4">
                   <TouchableOpacity 
-                    className="bg-gradR px-10 py-5 rounded-full items-center justify-center mb-4"
+                    className={` ${darkMode ? 'bg-fakeGlass border-2 border-fakeGlass' : 'bg-gradR'} px-10 py-5 rounded-full items-center justify-center mb-4`}
                     onPress={editHabitId ? saveEditHabit : addHabit}>
-                    <Text className="font-psemibold text-secpurpe text-xl">{editHabitId ? "Edit" : "Save"}</Text>
+                    <Text className={`font-psemibold ${darkMode ? 'text-hliba' : 'text-secpurpe'}  text-xl`}>{editHabitId ? "Edit" : "Save"}</Text>
                   </TouchableOpacity>
                   {editHabitId && (
                     <TouchableOpacity 
                       onPress={deleteHabit} 
-                      className="bg-mainred px-10 py-5 rounded-full items-center justify-center mb-3">
+                      className={` ${darkMode ? 'bg-fakeGlass border-2 border-fakeGlass' : 'bg-mainred'}  px-10 py-5 rounded-full items-center justify-center mb-3`}>
                       <Text className="font-psemibold text-secred text-xl">Delete</Text>
                     </TouchableOpacity>
                   )}
                   <TouchableOpacity 
-                    className="bg-mainblue px-10 py-5 rounded-full items-center justify-center mt-1"
+                    className={`${darkMode ? 'bg-fakeGlass border-2 border-fakeGlass' : 'bg-mainblue'} px-10 py-5 rounded-full items-center justify-center mt-1`}
                     onPress={() => {
                       setModalVisible(false);
                       setEditHabitId(null);

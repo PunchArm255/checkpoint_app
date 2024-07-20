@@ -25,8 +25,8 @@ const About = () => {
         </View>
 
         {/* bottom */}
-        <View className="items-center mt-[10%]">
-          <Image source={images.alx} className="w-[35%] h-[35%]" resizeMode="contain" />
+        <View className="items-center mt-[35%]">
+          {/*<Image source={images.alx} className="w-[35%] h-[35%]" resizeMode="contain" />*/}
           <View className="mt-1">
                   <Text className="text-xs font-pbold text-secpurpe">© Simo Nassiri - 2024</Text>
                 </View>

@@ -8,7 +8,7 @@ import { images } from '../../constants';
 import { BarIndicator } from 'react-native-indicators';
 
 const Addictions = () => {
-  const { addictions, setAddictions, addictionStreak, setAddictionStreak, handleAddAddiction, handleUpdateAddiction, handleDeleteAddiction, toggleAddictionDone, darkMode } = useGlobalContext();
+  const { addictions, handleAddAddiction, handleUpdateAddiction, handleDeleteAddiction, toggleAddictionDone, darkMode } = useGlobalContext();
   const [modalVisible, setModalVisible] = useState(false);
   const [newAddiction, setNewAddiction] = useState('');
   const [editAddictionId, setEditAddictionId] = useState(null);
@@ -108,32 +108,33 @@ const Addictions = () => {
           )}
         />
         <Modal visible={modalVisible} animationType="slide">
-          <View className="px-10 bg-secpurpe flex-1 justify-center items-center">
+        <View className={`px-10 ${darkMode ? 'bg-black' : 'bg-secpurpe'} flex-1 justify-center items-center`}>
             {isAddingAddiction ? (
               <BarIndicator count={5} color={darkMode ? "#18154a" : "#18154a"} />
             ) : (
               <>
                 <TextInput 
-                  placeholder="Addiction Name"
+                  placeholder="Type your addiction"
+                  placeholderTextColor={darkMode ? 'rgba(239, 239, 239, 0.30)' : 'undefined'}
                   value={editAddictionId ? editAddictionName : newAddiction}
                   onChangeText={text => editAddictionId ? setEditAddictionName(text) : setNewAddiction(text)}
-                  className="border-[3px] border-gradL p-2 w-full mb-4 rounded-xl font-psemibold text-gradL text-xl"
+                  className={`border-[3px] text-lg p-3 w-full mb-4 rounded-2xl font-psemibold ${darkMode ? 'border-fakeGlass text-hliba bg-fakeGlass ' : 'border-gradL text-gradL'} `}
                 />
                 <View className="mb-4">
                   <TouchableOpacity 
-                    className="bg-gradR px-10 py-5 rounded-full items-center justify-center mb-3"
+                    className={` ${darkMode ? 'bg-fakeGlass border-2 border-fakeGlass' : 'bg-gradR'} px-10 py-5 rounded-full items-center justify-center mb-4`}
                     onPress={editAddictionId ? saveEditAddiction : addAddiction}>
-                    <Text className="font-psemibold text-secpurpe text-xl">{editAddictionId ? "Edit" : "Save"}</Text>
+                    <Text className={`font-psemibold ${darkMode ? 'text-hliba' : 'text-secpurpe'}  text-xl`}>{editAddictionId ? "Edit" : "Save"}</Text>
                   </TouchableOpacity>
                   {editAddictionId && (
                     <TouchableOpacity 
                       onPress={deleteAddiction} 
-                      className="bg-mainred px-10 py-5 rounded-full items-center justify-center mb-3">
+                      className={` ${darkMode ? 'bg-fakeGlass border-2 border-fakeGlass' : 'bg-mainred'}  px-10 py-5 rounded-full items-center justify-center mb-3`}>
                       <Text className="font-psemibold text-secred text-xl">Delete</Text>
                     </TouchableOpacity>
                   )}
                   <TouchableOpacity 
-                    className="bg-mainblue px-10 py-5 rounded-full items-center justify-center mt-3"
+                    className={`${darkMode ? 'bg-fakeGlass border-2 border-fakeGlass' : 'bg-mainblue'} px-10 py-5 rounded-full items-center justify-center mt-1`}
                     onPress={() => {
                       setModalVisible(false);
                       setEditAddictionId(null);

@@ -2,7 +2,7 @@
   "expo": {
     "name": "checkpoint",
     "slug": "checkpoint",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "checkpoint",
@@ -20,7 +20,8 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#250c4b"
       },
-      "package": "com.nassiri.checkpoint"
+      "package": "com.puncharm255.checkpoint",
+      "versionCode": 2
     },
     "web": {
       "bundler": "metro",
