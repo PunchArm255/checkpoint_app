@@ -1,3 +1,4 @@
+![playstore banner](https://github.com/user-attachments/assets/e470b12e-3245-4fd2-b076-0ee99a520c50)
 # Welcome to Checkpoint! 🚩
 
 Checkpoint is a habit and addiction tracker application built with React Native and Expo. The app allows users to create accounts, log their habits and addictions, and track their progress over time.
