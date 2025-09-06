@@ -17,9 +17,9 @@ const About = () => {
       <SafeAreaView className="flex-1 justify-between px-4 mb-[50%]">
         {/* top */}
         <View className="items-center mt-6">
-                <View>
-                  <Text className="text-3xl font-pbold text-secpurpe">About</Text>
-                </View>
+          <View>
+            <Text className="text-3xl font-pbold text-secpurpe">About</Text>
+          </View>
           <Image source={images.about} className="w-[80%] h-[80%]" resizeMode="contain" />
 
         </View>
@@ -28,10 +28,10 @@ const About = () => {
         <View className="items-center mt-[35%]">
           {/*<Image source={images.alx} className="w-[35%] h-[35%]" resizeMode="contain" />*/}
           <View className="mt-1">
-                  <Text className="text-xs font-pbold text-secpurpe">© Simo Nassiri - 2024</Text>
-                </View>
+            <Text className="text-xs font-pbold text-secpurpe">© Simo Nassiri - 2025</Text>
+          </View>
         </View>
-        
+
       </SafeAreaView>
     </LinearGradient>
   );
