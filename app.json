@@ -21,7 +21,9 @@
         "backgroundColor": "#250c4b"
       },
       "package": "com.puncharm255.checkpoint",
-      "versionCode": 3
+      "versionCode": 3,
+      "compileSdkVersion": 35,
+      "targetSdkVersion": 35
     },
     "web": {
       "bundler": "metro",
