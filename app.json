@@ -21,7 +21,7 @@
         "backgroundColor": "#250c4b"
       },
       "package": "com.puncharm255.checkpoint",
-      "versionCode": 3,
+      "versionCode": 4,
       "compileSdkVersion": 35,
       "targetSdkVersion": 35
     },
